@@ -15,10 +15,13 @@ import { PostComponent } from './post/post.component';
 
 import { CategoriesService } from './categories.service';
 import { PostsListService } from './posts-list.service';
+import { DoctorService } from './doctor.service';
+
 import { ProfileComponent } from './profile/profile.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
 import { PatientsComponent } from './patients/patients.component';
 import { CalendarComponent } from './calendar/calendar.component';
+import { UploadAvatarComponent } from './upload-avatar/upload-avatar.component';
 
 const routes: Route[] =[
   {
@@ -64,7 +67,8 @@ const routes: Route[] =[
     ProfileComponent,
     AppointmentsComponent,
     PatientsComponent,
-    CalendarComponent
+    CalendarComponent,
+    UploadAvatarComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +78,8 @@ const routes: Route[] =[
     BrowserAnimationsModule,
     MyMaterialModule
   ],
-  providers: [CategoriesService, PostsListService],
+  entryComponents: [ProfileComponent, UploadAvatarComponent],
+  providers: [CategoriesService, PostsListService, DoctorService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
