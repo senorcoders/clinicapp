@@ -1,0 +1,15 @@
+<mat-card class="postslist-card flyInOut " [@listStagger] *ngFor="let post of posts">
+    <mat-card-header>
+    <div mat-card-avatar class="postslist-header-image"></div>
+    <mat-card-title  [innerHTML]="post.title.rendered"></mat-card-title>
+    <mat-card-subtitle [innerHTML]="post.excerpt.rendered"></mat-card-subtitle>    
+  </mat-card-header>
+  <!--<img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">-->
+  <mat-card-content>
+  </mat-card-content>
+  <mat-card-actions>
+    <span class="badge badge-pill badge-info">Info</span>
+    <span class="badge badge-pill badge-info">Info</span>
+    <span class="badge badge-pill badge-info">Info</span>
+  </mat-card-actions>
+</mat-card>

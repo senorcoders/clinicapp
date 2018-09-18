@@ -1,0 +1,43 @@
+
+          <mat-accordion>
+              <a routerLinkActive="active-link" [routerLink]="['/profile']" [queryParams]="{cat: php}">
+                <i class="fas fa-3x fa-user-md"></i>
+                <span>Profile</span>
+              </a>
+              <a routerLinkActive="active-link" [routerLink]="['/patients']">
+                <i class="fas fa-3x fa-users"></i>
+                <span>Patients</span>
+              </a>
+              <a routerLinkActive="active-link" [routerLink]="['/appointments']">
+                <i class="far fa-3x fa-calendar-check"></i>
+                <span>Appointments</span>
+              </a>
+              <a routerLinkActive="active-link" [routerLink]="['/calendar']">
+                <i class="fas fa-3x fa-calendar-alt"></i>
+                <span>Calendar</span>
+              </a>
+              <a routerLinkActive="active-link" [routerLink]="['/calendar']">
+                <i class="far fa-3x fa-envelope"></i>
+                <span>Messages</span>
+              </a>
+              
+              <a routerLinkActive="active-link" [routerLink]="['/wordpress']"><i class="fab fa-3x fa-wordpress"></i></a>
+              <a routerLinkActive="active-link" [routerLink]="['/mysql']"><i class="fab fa-3x fa-mysql"></i></a>
+              <!--<mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  <mat-panel-title>
+                      <mat-icon class="icon">favorite</mat-icon>Dashboard
+                  </mat-panel-title>                  
+                </mat-expansion-panel-header>
+            
+                <a [routerLink]="['/']" [queryParams]="{debug: true}">
+                  Home
+                </a>
+                <a [routerLink]="['/about']" [queryParams]="{debug: true}">
+                  About
+                </a>
+              </mat-expansion-panel>-->
+              
+            
+            </mat-accordion>
+      

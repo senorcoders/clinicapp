@@ -1,0 +1,49 @@
+.icon{
+    margin-right: 1em;
+}
+a {
+    color: #deebf2 !important;
+    width: 100%;
+    display: grid;
+    text-decoration: none;
+    &:hover{
+        color: #f3463f !important;                 
+    }
+    
+    text-align: center;
+    padding: 0.75em 0em;
+    margin: 0px !important;
+    &.active-link i, &.active-link span{
+        color: #f3463f;
+    }
+    span {
+        text-align: center;
+        text-transform: uppercase;
+        font-size: 0.8em;
+        font-weight: 700;
+        margin-top: 0.5em;
+    }
+}
+
+/*.mat-expansion-panel:not([class*=mat-elevation-z]) {
+    box-shadow: 0 0px 0px 0px rgba(0,0,0,.2), 0 0px 0px 0 rgba(0,0,0,.14), 0 0px 0px 0 rgba(0,0,0,.12);
+}
+.mat-expansion-panel {
+    background: #00639d;
+    color: rgba(255, 255, 255, 0.87);
+}
+.mat-expansion-panel-header-title {
+    color: rgba(255, 255, 255, 0.87);
+}
+.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+    color: rgba(255, 255, 255, 0.54) !important;
+}
+.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+    color: rgba(255, 255, 255, 0.54);
+}
+
+
+.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
+    color: rgba(255, 255, 255, 0.54);
+}
+*/
