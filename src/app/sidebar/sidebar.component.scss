@@ -19,12 +19,14 @@ a {
     span {
         text-align: center;
         text-transform: uppercase;
-        font-size: 0.8em;
+        font-size: 0.75em;
         font-weight: 700;
         margin-top: 0.5em;
     }
 }
-
+.row.main-padding {
+    padding: 0px;
+}
 /*.mat-expansion-panel:not([class*=mat-elevation-z]) {
     box-shadow: 0 0px 0px 0px rgba(0,0,0,.2), 0 0px 0px 0 rgba(0,0,0,.14), 0 0px 0px 0 rgba(0,0,0,.12);
 }
