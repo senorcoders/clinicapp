@@ -1,3 +1,82 @@
-<p>
-  patients works!
-</p>
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card class="patient">  
+        <div class="row">
+          <div class="col-md-3 patient-list">
+            <h5>Patient List</h5>
+            <mat-form-field class="example-full-width">
+                <input matInput placeholder="Filter by name" value="">
+              </mat-form-field>
+            <ul>
+              <li>
+                <div class="card">
+                  <img (click)="openModal()" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                  <span class="name">Teo Espinoza</span>
+                  <span class="age">4 Years Old</span></div>
+              </li>
+              <li>
+                <div class="card">
+                  <img (click)="openModal()" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                  <span class="name">Rene Espinoza</span>
+                  <span class="age">28 Years Old</span></div>
+              </li>
+              <li>
+                <div class="card">
+                  <img (click)="openModal()" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+                  <span class="name">Sebastian Espinoza</span>
+                  <span class="age">4 Years Old</span></div>
+              </li>
+            </ul>
+          </div>
+          <div class="col-md-9 patient-info">
+            <div class="box">
+              <h5>Patient Info</h5>
+              <div class="row">
+                <div class="col-md-4">
+                  <img src="https://via.placeholder.com/300x350">
+                  
+                </div>
+                <div class="col-md-8">
+                    <form class="patient-form">
+                        <mat-form-field class="example-full-width name">
+                          <input matInput class="" placeholder="Patient Name" value="Senorcoders Name">
+                        </mat-form-field>
+                      
+                        <mat-form-field class="example-full-width email">
+                            <input class="" matInput placeholder="Email">
+                        </mat-form-field>
+                        
+                        <mat-form-field class="example-full-width phone">
+                          <input matInput class="" placeholder="Phone">
+                        </mat-form-field>
+                        
+
+                        <mat-form-field class="example-full-width address">
+                          <textarea matInput class="" placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width notes">
+                          <textarea matInput class="" placeholder="Notes"></textarea>
+                        </mat-form-field>
+
+                        <mat-form-field class="example-full-width city">
+                            <input matInput class="" placeholder="City">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width state">
+                          <input matInput class="" placeholder="State">
+                        </mat-form-field>
+                        <mat-form-field class="example-full-width postal">
+                          <input matInput class="" #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+                          <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                        </mat-form-field>
+                        
+                      </form>
+                </div>
+              </div>              
+            </div>
+          </div>
+        </div>
+      </mat-card>
+    </div>    
+  </div>
+</div>

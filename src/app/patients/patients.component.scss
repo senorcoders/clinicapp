@@ -1,0 +1,71 @@
+.patient-list {
+    ul {
+        list-style-type: none;
+        margin:  0px;
+        padding: 0px;
+        li {
+            margin-bottom: 0.5em;
+            .card {
+                display: grid;
+                grid-template-columns: 25% auto auto;
+                border: none;
+                overflow: hidden;
+    
+                .mat-card-image {
+                    width: 100%;
+                    margin: 0px !important;
+                }
+                span.name {
+                    align-self: center;
+                    padding-left: 10px;
+                }
+                span.age {
+                    align-self: center;
+                    text-align: right
+                }
+            }
+        }
+    }
+}
+
+.patient-info {
+    border-left: solid 1px #ccc;
+    .patient-form {
+        display: grid;
+        grid-template-areas:    "name      email      phone"
+                                "address   address    address"
+                                "notes     notes      notes"
+                                "city      state      postal";
+        mat-form-field {
+            width: 97%
+        }
+        .name {
+            grid-area: name;            
+        }
+        .email {
+            grid-area: email;            
+        }
+        .phone {
+            grid-area: phone;
+        }
+        .address {
+            grid-area: address;
+        }
+        .notes {
+            grid-area: notes;
+        }
+        .city {
+            grid-area: city;
+        }
+        .state {
+            grid-area: state;
+        }
+        .postal {
+            grid-area: postal;
+        }
+        input {
+            margin-left: 5px;
+            margin-right: 5px;
+        }
+    }
+}
