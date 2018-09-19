@@ -1,8 +1,9 @@
   import { BrowserModule } from '@angular/platform-browser';
   import { NgModule } from '@angular/core';
-  import { FormsModule } from '@angular/forms';
+  import { FormsModule, ReactiveFormsModule } from '@angular/forms';
   import { HttpClientModule } from '@angular/common/http';
   import { RouterModule, Route } from '@angular/router';
+  
 
 import { AppComponent } from './app.component';
 
@@ -22,6 +23,9 @@ import { AppointmentsComponent } from './appointments/appointments.component';
 import { PatientsComponent } from './patients/patients.component';
 import { CalendarComponent } from './calendar/calendar.component';
 import { UploadAvatarComponent } from './upload-avatar/upload-avatar.component';
+import { CheckupsComponent } from './checkups/checkups.component';
+import { PrescriptionComponent } from './prescription/prescription.component';
+import { ContactComponent } from './contact/contact.component';
 
 const routes: Route[] =[
   {
@@ -68,17 +72,21 @@ const routes: Route[] =[
     AppointmentsComponent,
     PatientsComponent,
     CalendarComponent,
-    UploadAvatarComponent
+    UploadAvatarComponent,
+    CheckupsComponent,
+    PrescriptionComponent,
+    ContactComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     RouterModule.forRoot( routes ),
     BrowserAnimationsModule,
     MyMaterialModule
   ],
-  entryComponents: [ProfileComponent, UploadAvatarComponent],
+  entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, ContactComponent],
   providers: [CategoriesService, PostsListService, DoctorService],
   bootstrap: [AppComponent]
 })

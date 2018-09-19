@@ -38,40 +38,43 @@
                   
                 </div>
                 <div class="col-md-8">
-                    <form class="patient-form">
-                        <mat-form-field class="example-full-width name">
-                          <input matInput class="" placeholder="Patient Name" value="Senorcoders Name">
-                        </mat-form-field>
-                      
-                        <mat-form-field class="example-full-width email">
-                            <input class="" matInput placeholder="Email">
-                        </mat-form-field>
-                        
-                        <mat-form-field class="example-full-width phone">
-                          <input matInput class="" placeholder="Phone">
-                        </mat-form-field>
-                        
+                  <form class="patient-form">
+                    <mat-form-field class="example-full-width name">
+                      <input matInput class="" placeholder="Patient Name" value="Senorcoders Name">
+                    </mat-form-field>
+                  
+                    <mat-form-field class="example-full-width email">
+                        <input class="" matInput placeholder="Email">
+                    </mat-form-field>
+                    
+                    <mat-form-field class="example-full-width phone">
+                      <input matInput class="" placeholder="Phone">
+                    </mat-form-field>
+                    
 
-                        <mat-form-field class="example-full-width address">
-                          <textarea matInput class="" placeholder="Address">1600 Amphitheatre Pkwy</textarea>
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width notes">
-                          <textarea matInput class="" placeholder="Notes"></textarea>
-                        </mat-form-field>
+                    <mat-form-field class="example-full-width address">
+                      <textarea matInput class="" placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width notes">
+                      <textarea matInput class="" placeholder="Notes"></textarea>
+                    </mat-form-field>
 
-                        <mat-form-field class="example-full-width city">
-                            <input matInput class="" placeholder="City">
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width state">
-                          <input matInput class="" placeholder="State">
-                        </mat-form-field>
-                        <mat-form-field class="example-full-width postal">
-                          <input matInput class="" #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-                          <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
-                        </mat-form-field>
-                        
-                      </form>
-                </div>
+                    <mat-form-field class="example-full-width city">
+                        <input matInput class="" placeholder="City">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width state">
+                      <input matInput class="" placeholder="State">
+                    </mat-form-field>
+                    <mat-form-field class="example-full-width postal">
+                      <input matInput class="" #postalCode maxlength="5" placeholder="Postal Code" value="94043">
+                      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                    </mat-form-field>
+                    <br>
+                    <button class="btn_photo" color="primary" mat-flat-button>Update Photo</button>
+                    <button class="btn_info" color="primary" mat-flat-button>Update Info</button>
+                    <button class="btn_contact" color="primary" mat-flat-button>View Contact Info</button>
+                  </form>
+              </div>
               </div>              
             </div>
           </div>

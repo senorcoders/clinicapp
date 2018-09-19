@@ -1,0 +1,72 @@
+.row {
+    margin: 0em 0px 1em 0px;
+}
+button {
+    width: 100%;
+}
+mat-card.patient-search.mat-card {
+    padding: 10px 1em;
+
+    .mat-autocomplete-panel {
+        display: inline-table !important;
+    }
+    .mat-form-field {
+        width: 100%;
+    }
+}
+mat-card.patient-info.mat-card {
+    padding: 10px 0px;
+
+    .row {
+        margin:0px;
+    }
+    img {
+        width: 100%;
+        margin-left: 0px;
+        margin-top: -10px;
+    }
+    mat-card-content.mat-card-content {
+        padding: 0px 15px;
+        text-align: justify;
+    }
+    mat-card-actions.mat-card-actions {
+        margin: 0px;
+    }
+
+    mat-card-actions.mat-card-actions {
+        margin: 0px;
+        padding: 10px;
+        margin-bottom: 0px;
+    }
+}
+.mat-form-field {
+    width: 97%;
+}
+.notes-form {
+    display: grid;
+    grid-template-areas: "weight   weight"
+                         "height   height"
+                         "reason   reason"
+                         "notes    notes"
+                         "btn_save btn_save";
+    
+    
+    .title {
+        grid-area: title;
+    }
+    .weight {
+        grid-area: weight;
+    }
+    .height {
+        grid-area: height;
+    }
+    .reason {
+        grid-area: reason;
+    }
+    .notes {
+        grid-area: notes;
+    }
+    .btn_save {
+        grid-area:btn_save;
+    }
+}

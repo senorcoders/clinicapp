@@ -35,8 +35,9 @@
         grid-template-areas:    "name      email      phone"
                                 "address   address    address"
                                 "notes     notes      notes"
-                                "city      state      postal";
-        mat-form-field {
+                                "city      state      postal"
+                                "btn_photo btn_info   btn_contact";
+        mat-form-field, button {
             width: 97%
         }
         .name {
@@ -62,6 +63,15 @@
         }
         .postal {
             grid-area: postal;
+        }
+        .btn_photo {
+            grid-area: btn_photo;
+        }
+        .btn_info {
+            grid-area: btn_info;
+        }
+        .btn_contact {
+            grid-area: btn_contact;
         }
         input {
             margin-left: 5px;

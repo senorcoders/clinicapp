@@ -1,3 +1,100 @@
-<p>
-  appointments works!
-</p>
+<div class="">
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card class="patient-search">
+          <form class="example-form">
+            <mat-form-field class="example-full-width">
+              <input matInput placeholder="Select Patient" aria-label="Select Patient" [matAutocomplete]="auto" [formControl]="stateCtrl">
+              <mat-autocomplete #auto="matAutocomplete">
+                <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
+                  <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
+                  <span>{{state.name}}</span> |
+                  <small>Population: {{state.population}}</small>
+                </mat-option>
+              </mat-autocomplete>
+            </mat-form-field>
+          </form>
+      </mat-card>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-3">
+        <mat-card class="patient-info">  
+        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <mat-card-content>
+          <h5>Name</h5>
+          <br>
+            28 Años
+          <br>
+            Email: milton@senorcoders.com
+          <br>
+            Phone: 123456789
+          <br>
+          <span>Notes:</span>
+          <p>
+            About me.... The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
+            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
+            bred for hunting.
+          </p>
+        </mat-card-content>
+        <mat-card-actions>          
+          <button color="primary" (click)="openAvatarModal()" color="primary" mat-flat-button>UPDATE PHOTO</button>
+        </mat-card-actions>
+      </mat-card>     
+      
+    </div>
+
+    <div class="col-md-3">
+      <mat-card class="patient-appointments container-fluid">
+        <h6 class="title">Notes</h6>
+        <form class="notes-form">
+          <mat-form-field class="example-full-width weight">
+            <input matInput class="" placeholder="Weight">
+          </mat-form-field>
+          <mat-form-field class="example-full-width height">
+              <input matInput class="" placeholder="Height">
+            </mat-form-field>
+          <mat-form-field class="example-full-width reason">
+              <textarea matInput class="" placeholder="Reason">Congestion Nasal</textarea>
+          </mat-form-field>
+        
+          <mat-form-field class="example-full-width notes">
+              <textarea matInput class="" placeholder="Address">Notes</textarea>
+          </mat-form-field>                
+          <br>                
+          <button class="btn_save" color="primary" mat-flat-button>Save Info</button>                
+        </form>
+      </mat-card>
+    </div>
+
+    <div class="col-md-6">
+      <div class="row">
+        <div class="col-md-12">
+            <mat-card class="patient-checkups container-fluid">
+              <h6>Checkups</h6>                                          
+                <br>                
+                <button (click)="openCheckupsModal()" class="btn_save" color="primary" mat-flat-button>Add Checkup</button>              
+            </mat-card>
+          </div>
+          <div class="col-md-12">
+            <mat-card class="patient-prescription container-fluid">
+              <h6>Prescription</h6>                            
+                <br>                
+                <button  (click)="openPrescriptionModal()"  class="btn_save" color="primary" mat-flat-button>Add Prescription</button>
+            </mat-card>
+          </div>
+      </div>
+    </div>
+    
+
+    
+
+  </div>
+  <div class="row">
+    <div class="col-md-12">
+      <mat-card class="patient-history container-fluid">
+          <h6>History</h6>
+      </mat-card>
+    </div>
+  </div>
+</div>

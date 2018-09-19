@@ -42,5 +42,5 @@ export class ProfileComponent implements OnInit {
     console.log(" Dialog was closed ")
     console.log(result)
    });
-    }
+  }
 }
