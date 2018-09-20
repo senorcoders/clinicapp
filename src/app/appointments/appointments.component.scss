@@ -70,3 +70,10 @@ mat-card.patient-info.mat-card {
         grid-area:btn_save;
     }
 }
+
+.patient-history {
+    .mat-table {
+        background: #fff;
+        width: 100%;
+    }
+}

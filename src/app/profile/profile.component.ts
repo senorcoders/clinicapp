@@ -31,7 +31,7 @@ export class ProfileComponent implements OnInit {
   }
   openModal() {
     const dialogConfig = new MatDialogConfig();
-   dialogConfig.disableClose = true;
+    dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
     id: '5ba0357ce01ba104ac9ea7a6',

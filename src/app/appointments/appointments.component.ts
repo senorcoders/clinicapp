@@ -13,6 +13,19 @@ export interface State {
   population: string;
 }
 
+export interface HistoryElement {
+  adate: string;
+  reason: string;
+  notes: string;
+}
+
+const ELEMENT_DATA: HistoryElement[] = [
+  {adate: "May 18th, 2018", reason: 'High Fever', notes: 'paracetamol 8 times a day'},
+  {adate: "May 12th, 2018", reason: 'High Fever', notes: 'paracetamol 8 times a day'},
+  {adate: "May 01th, 2018", reason: 'High Fever', notes: 'paracetamol 8 times a day'},
+  {adate: "Apr 15th, 2018", reason: 'High Fever', notes: 'paracetamol 8 times a day'},
+  {adate: "Feb 08th, 2018", reason: 'High Fever', notes: 'paracetamol 8 times a day'}
+];
 
 @Component({
   selector: 'tsel-appointments',
@@ -20,7 +33,8 @@ export interface State {
   styleUrls: ['./appointments.component.scss']
 })
 export class AppointmentsComponent implements OnInit {
-
+  displayedColumns: string[] = ['adate', 'reason', 'notes'];
+  dataSource = ELEMENT_DATA;
 
   stateCtrl = new FormControl();
   filteredStates: Observable<State[]>;
@@ -50,7 +64,7 @@ export class AppointmentsComponent implements OnInit {
       // https://commons.wikimedia.org/wiki/File:Flag_of_Texas.svg
       flag: 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Flag_of_Texas.svg'
     }
-  ];
+  ];  
 
   constructor(  public dialog: MatDialog ) { 
     this.filteredStates = this.stateCtrl.valueChanges

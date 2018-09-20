@@ -93,7 +93,47 @@
   <div class="row">
     <div class="col-md-12">
       <mat-card class="patient-history container-fluid">
-          <h6>History</h6>
+        <h6>History</h6>
+        <div class="row">
+          <div class="col-md-5 history">
+            <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
+
+              <!--- Note that these columns can be defined in any order.
+                    The actual rendered columns are set as a property on the row definition" -->
+                    
+              <!-- adate Column -->
+              <ng-container matColumnDef="adate">
+                <th mat-header-cell *matHeaderCellDef> Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.adate}} </td>
+              </ng-container>
+            
+              <!-- reason Column -->
+              <ng-container matColumnDef="reason">
+                <th mat-header-cell *matHeaderCellDef> Reason </th>
+                <td mat-cell *matCellDef="let element"> {{element.reason}} </td>
+              </ng-container>
+            
+              <!-- notes Column -->
+              <ng-container matColumnDef="notes">
+                <th mat-header-cell *matHeaderCellDef> Notes </th>
+                <td mat-cell *matCellDef="let element"> {{element.notes}} </td>
+              </ng-container>
+            
+              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+            </table>
+          </div>
+          <div class="col-md-7 detail">
+            <div class="row">
+              <div class="col-md-6"> 
+                <h6>Checkups</h6>
+              </div>
+              <div class="col-md-6"> 
+                  <h6>Prescription</h6>
+              </div>
+            </div>
+          </div>
+        </div>        
       </mat-card>
     </div>
   </div>
