@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CategoriesService } from '../categories.service';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'tsel-sidebar',
@@ -30,11 +31,20 @@ export class SidebarComponent implements OnInit {
       icon: ""
     }
   ]
-  constructor(private _categoryService: CategoriesService ) { }
+  constructor(private _categoryService: CategoriesService, private authService: AuthService) {
+    if( this.authService.isAuthenticated ){
+      this.authService.getAccount();
+    }
+   }
   
   ngOnInit() {
     this._categoryService.getCategories()
     .subscribe( data => this.categories = data );
+    
+  }
+
+  logout() {
+    this.authService.logout();
   }
 
 }

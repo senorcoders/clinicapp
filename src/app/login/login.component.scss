@@ -1,0 +1,16 @@
+.login-form {
+    .title {
+        font-weight: 300;
+        font-size: 2em;
+        text-align: center;
+        color: #00639d;
+        margin-bottom: 1em;
+    }
+    .mat-form-field {
+        min-width: 350px;
+        margin-bottom: 1.5em;
+    }
+    button.mat-flat-button.mat-primary {
+        width: 100%;
+    }
+}

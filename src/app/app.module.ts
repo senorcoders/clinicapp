@@ -1,7 +1,7 @@
   import { BrowserModule } from '@angular/platform-browser';
   import { NgModule } from '@angular/core';
   import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-  import { HttpClientModule } from '@angular/common/http';
+  import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
   import { RouterModule, Route } from '@angular/router';
   
 
@@ -26,11 +26,16 @@ import { UploadAvatarComponent } from './upload-avatar/upload-avatar.component';
 import { CheckupsComponent } from './checkups/checkups.component';
 import { PrescriptionComponent } from './prescription/prescription.component';
 import { ContactComponent } from './contact/contact.component';
+import { LoginComponent } from './login/login.component';
+
+import { AuthService } from './auth.service';
+import { InterceptService } from './services/intercept.service';
+import { CanActivateViaAuthGuardService } from './services/can-activate-via-auth-guard.service';
 
 const routes: Route[] =[
   {
     path: '',
-    component: AppComponent
+    component: ProfileComponent
   },
   {
     path: 'profile',
@@ -47,18 +52,6 @@ const routes: Route[] =[
   {
     path: 'calendar',
     component: CalendarComponent
-  },
-  {
-    path: 'wordpress',
-    component: PostsListComponent
-  },
-  {
-    path: 'php',
-    component: AppComponent
-  },
-  {
-    path: 'php',
-    component: AppComponent
   }
   
 ]
@@ -75,7 +68,8 @@ const routes: Route[] =[
     UploadAvatarComponent,
     CheckupsComponent,
     PrescriptionComponent,
-    ContactComponent
+    ContactComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -87,7 +81,13 @@ const routes: Route[] =[
     MyMaterialModule
   ],
   entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, ContactComponent],
-  providers: [CategoriesService, PostsListService, DoctorService],
+  providers: [CategoriesService, PostsListService, DoctorService, AuthService,
+  {
+    provide: HTTP_INTERCEPTORS,
+    useClass: InterceptService,
+    multi: true
+  },
+  CanActivateViaAuthGuardService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

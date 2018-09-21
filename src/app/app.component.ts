@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { AuthService } from './auth.service';
 
 @Component({
   selector: 'tsel-root',
@@ -9,4 +9,10 @@ import { Component } from '@angular/core';
 export class AppComponent {
   opened: boolean = true;
   title = 'angular-bootstrap';
+  loggedIn: boolean = false;
+
+  constructor( private authService: AuthService) {    
+    
+  }
+  
 }
