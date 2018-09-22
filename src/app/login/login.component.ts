@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { AuthService } from '../auth.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'tsel-login',
@@ -22,9 +22,10 @@ export class LoginComponent implements OnInit {
 
   login() {
     const val = this.form.value;
-
+    let res: any;
     if (val.email && val.password) {
         this.authService.login(val.email, val.password);
+        
     }
 }
 
