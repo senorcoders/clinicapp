@@ -1,6 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { UploadAvatarComponent } from '../upload-avatar/upload-avatar.component';
+import { AuthService } from '../services/auth.service';
+import { Router } from '@angular/router';
+import { DoctorService } from '../services/doctor.service'
+import { environment } from '../../environments/environment';
 
 export interface PeriodicElement {
   name: string;
@@ -24,10 +28,21 @@ const ELEMENT_DATA: PeriodicElement[] = [
 })
 export class ProfileComponent implements OnInit {
   displayedColumns: string[] = ['position', 'name', 'weight', 'symbol'];
-  dataSource = ELEMENT_DATA;
-  constructor( public dialog: MatDialog ) { }
+  dataSource: PeriodicElement[];
+  doctorID: string;
+  doctorAvatar: string;
+  
+
+  constructor( public dialog: MatDialog, private authService: AuthService, private router: Router, private doctorService: DoctorService ) { 
+    this.doctorID = authService.doctorID;
+    this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
+    doctorService.getDoctorInfo().subscribe( result => {
+      console.log( result );
+    } )
+  }
 
   ngOnInit() {
+    
   }
   openModal() {
     const dialogConfig = new MatDialogConfig();
@@ -41,6 +56,8 @@ export class ProfileComponent implements OnInit {
    dialogRef.afterClosed().subscribe(result => {
     console.log(" Dialog was closed ")
     console.log(result)
+     //document.querySelector(".doctorAvatar").src=`${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
+     this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
    });
   }
 }
