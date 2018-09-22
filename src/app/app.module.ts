@@ -16,7 +16,7 @@ import { PostComponent } from './post/post.component';
 
 import { CategoriesService } from './categories.service';
 import { PostsListService } from './posts-list.service';
-import { DoctorService } from './doctor.service';
+import { DoctorService } from './services/doctor.service';
 
 import { ProfileComponent } from './profile/profile.component';
 import { AppointmentsComponent } from './appointments/appointments.component';
@@ -28,30 +28,35 @@ import { PrescriptionComponent } from './prescription/prescription.component';
 import { ContactComponent } from './contact/contact.component';
 import { LoginComponent } from './login/login.component';
 
-import { AuthService } from './auth.service';
+import { AuthService } from './services/auth.service';
 import { InterceptService } from './services/intercept.service';
 import { CanActivateViaAuthGuardService } from './services/can-activate-via-auth-guard.service';
+import { AuthGuard } from './auth.guard';
 
 const routes: Route[] =[
   {
     path: '',
-    component: ProfileComponent
+    component: LoginComponent
   },
   {
     path: 'profile',
-    component: ProfileComponent
+    component: ProfileComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'appointments',
-    component: AppointmentsComponent
+    component: AppointmentsComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'patients',
-    component: PatientsComponent
+    component: PatientsComponent,
+    canActivate: [ AuthGuard ]
   },
   {
     path: 'calendar',
-    component: CalendarComponent
+    component: CalendarComponent,
+    canActivate: [ AuthGuard ]
   }
   
 ]
@@ -87,7 +92,7 @@ const routes: Route[] =[
     useClass: InterceptService,
     multi: true
   },
-  CanActivateViaAuthGuardService],
+  AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
