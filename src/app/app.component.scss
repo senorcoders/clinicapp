@@ -17,7 +17,7 @@
     }
     .logged_in_users {
         display: grid;
-        grid-template-columns: auto auto;
+        grid-template-columns: minmax(auto, max-content) auto;
         height: 100vh;
         .sidebar {
             padding-left: 15px;

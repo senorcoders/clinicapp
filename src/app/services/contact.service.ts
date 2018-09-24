@@ -18,6 +18,10 @@ export class ContactService {
     return this.http.post( environment.base_api + '/contact', contact )
   }
 
+  updateContact( id:string, contact:any ) {
+    return this.http.patch( environment.base_api + '/contact/' + id, contact )
+  }
+
   deleteContact ( contact_id: string ) {
     return this.http.delete( environment.base_api + '/contact/' + contact_id )
   }

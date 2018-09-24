@@ -58,7 +58,7 @@ export class ProfileComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-    id: '5ba0357ce01ba104ac9ea7a6',
+    id: this.doctorID,
     title: 'Update Avatar Image'
     };
    const dialogRef = this.dialog.open(UploadAvatarComponent, dialogConfig);
@@ -70,22 +70,23 @@ export class ProfileComponent implements OnInit {
    });
   }
 
-  openContactModal() {
+  openContactModal( contact_id, typo, value ) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-    id: this.doctorID,
-    title: 'Add Contact Information'
+      id: this.doctorID,
+      contactID: contact_id,
+      title: 'Contact Information',
+      typo: typo,
+      value: value
     };
   
     const dialogRef = this.dialog.open(ContactComponent, dialogConfig);
    dialogRef.afterClosed().subscribe(result => {
     console.log(" Dialog was closed ")
     console.log(result)
-    this.refreshContactInfo();
-     //document.querySelector(".doctorAvatar").src=`${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
-     //this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
+    this.refreshContactInfo();     
    });
   }
 

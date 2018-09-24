@@ -11,14 +11,15 @@
             <div *ngIf="addContactForm.controls.typo.errors.required">Typo is required</div>
           </div>
       </mat-form-field>
+      
       <mat-form-field class="example-full-width">
-        <input formControlName="value" matInput placeholder="Value" value="">
+        <input formControlName="value" matInput placeholder="Value">
         <div *ngIf="submitted && addContactForm.controls.value.errors" class="error">
           <div *ngIf="addContactForm.controls.value.errors.required">Value is required</div>
         </div>
       </mat-form-field>
       
-      <input formControlName="user" type="hidden" placeholder="user" [(ngModel)]="userID">
+      <input formControlName="user" type="hidden" placeholder="user" >
       
 </mat-dialog-content>
 <mat-dialog-actions>

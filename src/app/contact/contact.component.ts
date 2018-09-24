@@ -18,9 +18,11 @@ export interface ContactTypos {
 })
 export class ContactComponent implements OnInit {
   modalTitle: string;
-  userID: number;
+  user: number;
   addContactForm: FormGroup;
-
+  typo: string;
+  value: string;  
+  id: string;
 
   typos: ContactTypos[] = [
     {value: 'fas fa-phone', viewValue: 'Phone'},
@@ -34,23 +36,39 @@ export class ContactComponent implements OnInit {
 
   constructor( @Inject( MAT_DIALOG_DATA ) public data: any, private formBuilder: FormBuilder,private router: Router, private contactService: ContactService ) { 
     this.modalTitle = data.title;
-    this.userID = data.id;
+    this.user = data.id;
+    this.typo = data.typo;
+    this.value = data.value;
+    if( data.hasOwnProperty( "contactID" ) ){
+      this.id = data.contactID;
+    }else {
+      this.id = '';
+    }
     console.log(data);
    }
 
   ngOnInit() {
     this.addContactForm = this.formBuilder.group( {      
-      typo: [ '', Validators.required ],
-      value: [ '', Validators.required ],
-      user: ['', Validators.required ]
+      typo: [ this.typo, Validators.required ],
+      value: [ this.value, Validators.required ],
+      user: [this.user, Validators.required ]
     } )
   }
 
   saveContact() {
-    this.contactService.saveContact( this.addContactForm.value )
+    if( this.id != '' ) {
+      this.contactService.updateContact( this.id ,this.addContactForm.value )
       .subscribe( data => {
         console.log( data );
       } )
+    } else {
+      this.contactService.saveContact( this.addContactForm.value )
+      .subscribe( data => {
+        console.log( data );
+      } )
+      
+    }
+    
   }
 
   
