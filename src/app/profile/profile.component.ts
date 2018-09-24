@@ -1,9 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
-import { UploadAvatarComponent } from '../upload-avatar/upload-avatar.component';
-import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
+
+import { UploadAvatarComponent } from '../upload-avatar/upload-avatar.component';
+import { ContactComponent } from '../contact/contact.component';
+
+import { AuthService } from '../services/auth.service';
 import { DoctorService } from '../services/doctor.service'
+import { ContactService } from '../services/contact.service';
+
 import { environment } from '../../environments/environment';
 
 export interface PeriodicElement {
@@ -31,20 +36,24 @@ export class ProfileComponent implements OnInit {
   dataSource: PeriodicElement[];
   doctorID: string;
   doctorAvatar: string;
+  doctorInfo: any;
   
 
-  constructor( public dialog: MatDialog, private authService: AuthService, private router: Router, private doctorService: DoctorService ) { 
+  constructor( public dialog: MatDialog, private authService: AuthService, private router: Router, private doctorService: DoctorService, private contactService: ContactService ) { 
     this.doctorID = authService.doctorID;
     this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
-    doctorService.getDoctorInfo().subscribe( result => {
-      console.log( result );
+    this.doctorService.getDoctorInfo().subscribe( result => {
+      this.doctorInfo =  result ;
+      console.log(this.doctorInfo);
     } )
   }
 
   ngOnInit() {
     
   }
-  openModal() {
+
+
+  openAvatarModal() {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
@@ -60,4 +69,41 @@ export class ProfileComponent implements OnInit {
      this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
    });
   }
+
+  openContactModal() {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+    id: this.doctorID,
+    title: 'Add Contact Information'
+    };
+  
+    const dialogRef = this.dialog.open(ContactComponent, dialogConfig);
+   dialogRef.afterClosed().subscribe(result => {
+    console.log(" Dialog was closed ")
+    console.log(result)
+    this.refreshContactInfo();
+     //document.querySelector(".doctorAvatar").src=`${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
+     //this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
+   });
+  }
+
+  deleteContact( contact_id: string ) {
+    this.contactService.deleteContact( contact_id )
+      .subscribe( data => {
+        console.log( 'contacto eliminado' );
+        console.log( data );
+        this.refreshContactInfo();
+      } )
+  }
+
+  refreshContactInfo(){
+    this.doctorService.getDoctorInfo().subscribe( result => {
+      this.doctorInfo.contact = [];
+      this.doctorInfo.contact =  result.contact ;
+      console.log(this.doctorInfo);
+    } )
+  }
+
 }

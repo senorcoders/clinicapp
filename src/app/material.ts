@@ -16,10 +16,11 @@ import {MatInputModule} from '@angular/material/input';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatSelectModule} from '@angular/material/select';
 
 
 @NgModule({
-  imports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTreeModule, MatExpansionModule, MatTableModule, MatDialogModule, MatInputModule, MatAutocompleteModule, MatSlideToggleModule, MatFormFieldModule],
-  exports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTreeModule, MatExpansionModule, MatTableModule, MatDialogModule, MatInputModule, MatAutocompleteModule, MatSlideToggleModule, MatFormFieldModule],
+  imports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTreeModule, MatExpansionModule, MatTableModule, MatDialogModule, MatInputModule, MatAutocompleteModule, MatSlideToggleModule, MatFormFieldModule, MatSelectModule],
+  exports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTreeModule, MatExpansionModule, MatTableModule, MatDialogModule, MatInputModule, MatAutocompleteModule, MatSlideToggleModule, MatFormFieldModule, MatSelectModule],
 })
 export class MyMaterialModule { }

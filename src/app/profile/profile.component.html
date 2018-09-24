@@ -4,23 +4,34 @@
       <mat-card class="example-card">  
         <img (click)="openModal()" class="doctorAvatar" mat-card-image src="{{doctorAvatar}}" alt="Photo of a Shiba Inu">
         <mat-card-content>
-          <h5>Name</h5>
+          <h5>{{doctorInfo.info[0].name}}</h5>
+          <span class="email"><i class="fas fa-envelope"></i>{{doctorInfo.info[0].email}}</span>
           <p>
-            About me.... The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
+            {{doctorInfo.info[0].notes}}
           </p>
         </mat-card-content>
         <mat-card-actions>
           <button color="primary" mat-flat-button>EDIT</button>
-          <button color="primary" (click)="openModal()" color="primary" mat-flat-button>UPDATE PHOTO</button>
+          <button color="primary" (click)="openAvatarModal()" color="primary" mat-flat-button>UPDATE PHOTO</button>
         </mat-card-actions>
       </mat-card>      
     </div>
     <div class="col-md-4">
-        <mat-card class="example-card">  
-            <h5>Contact Information</h5>
-        
+        <mat-card class="contact">  
+          <h5>Contact Information</h5>
+          <ul class="list">
+            <li *ngFor="let contct of doctorInfo.contact">
+              <span>
+                  <i class="{{contct.typo}}" ></i>
+                  {{contct.value}}
+              </span>
+              <div>
+                  <!--<button mat-flat-button color="primary" ><i class="far fa-edit"></i> </button>-->
+                  <button mat-flat-button color="primary" (click)="deleteContact( contct.id )" ><i class="fas fa-trash-alt"></i> </button>
+              </div>
+            </li>
+          </ul>    
+          <button class="add_contact" color="primary" mat-flat-button (click)="openContactModal()" >Add Contact Information</button>        
         </mat-card>
       </div>
     <div class="col-md-4">

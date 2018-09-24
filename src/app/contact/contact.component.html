@@ -1,9 +1,29 @@
 <h2 mat-dialog-title>{{modalTitle}}</h2>
-<mat-dialog-content>Do you wish to update your profile image?
-  <br><input type="file" name="avatar">
+<form [formGroup]="addContactForm" (ngSubmit)="saveContact()">
+<mat-dialog-content>    
+    <mat-form-field>
+        <mat-select formControlName="typo" placeholder="Type">
+          <mat-option *ngFor="let typo of typos" [value]="typo.value">
+            {{typo.viewValue}}
+          </mat-option>
+        </mat-select>
+        <div *ngIf="submitted && addContactForm.controls.valtypoue.errors" class="error">
+            <div *ngIf="addContactForm.controls.typo.errors.required">Typo is required</div>
+          </div>
+      </mat-form-field>
+      <mat-form-field class="example-full-width">
+        <input formControlName="value" matInput placeholder="Value" value="">
+        <div *ngIf="submitted && addContactForm.controls.value.errors" class="error">
+          <div *ngIf="addContactForm.controls.value.errors.required">Value is required</div>
+        </div>
+      </mat-form-field>
+      
+      <input formControlName="user" type="hidden" placeholder="user" [(ngModel)]="userID">
+      
 </mat-dialog-content>
 <mat-dialog-actions>
  <button mat-flat-button mat-dialog-close>Cancel</button>
  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.-->
- <button mat-flat-button [mat-dialog-close]="true">Upload</button>
+ <button mat-flat-button (click)="saveContact()" [mat-dialog-close]="true">Save</button>
 </mat-dialog-actions>
+</form>

@@ -9,3 +9,31 @@ button.mat-flat-button.mat-primary {
     width: 49%;
     margin: 0.5%;
 }
+.contact {
+    padding-bottom: 7px;
+    button.add_contact {
+        width: 100%;
+        margin-top: 1em;
+    }
+    ul {
+        margin:0;
+        padding: 0px;
+        li {
+            display: grid;
+            grid-template-columns: 75% 25%;
+            div {
+                align-self: center;
+            }
+            .i, span {
+                color: #00639d;
+                align-self: center;
+            }
+            button.mat-flat-button.mat-primary {
+                min-width: 49%;
+                margin-left: 0px;
+                align-self: center;
+                justify-self: center;
+            }
+        }
+    }
+}
