@@ -4,10 +4,13 @@ import { Router } from '@angular/router';
 
 import { UploadAvatarComponent } from '../upload-avatar/upload-avatar.component';
 import { ContactComponent } from '../contact/contact.component';
+import { BasicInfoComponent } from './basic-info/basic-info.component';
+import { DoctorServicesComponent } from './doctor-services/doctor-services.component';
 
 import { AuthService } from '../services/auth.service';
 import { DoctorService } from '../services/doctor.service'
 import { ContactService } from '../services/contact.service';
+import { DoctorServicesService } from '../services/doctor-services.service';
 
 import { environment } from '../../environments/environment';
 
@@ -39,7 +42,7 @@ export class ProfileComponent implements OnInit {
   doctorInfo: any;
   
 
-  constructor( public dialog: MatDialog, private authService: AuthService, private router: Router, private doctorService: DoctorService, private contactService: ContactService ) { 
+  constructor( public dialog: MatDialog, private authService: AuthService, private router: Router, private doctorService: DoctorService, private contactService: ContactService, private services: DoctorServicesService ) { 
     this.doctorID = authService.doctorID;
     this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
     this.doctorService.getDoctorInfo().subscribe( result => {
@@ -49,7 +52,10 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
-    
+    this.doctorService.getDoctorInfo().subscribe( result => {
+      this.doctorInfo =  result ;
+      console.log(this.doctorInfo);
+    } )
   }
 
 
@@ -83,11 +89,11 @@ export class ProfileComponent implements OnInit {
     };
   
     const dialogRef = this.dialog.open(ContactComponent, dialogConfig);
-   dialogRef.afterClosed().subscribe(result => {
-    console.log(" Dialog was closed ")
-    console.log(result)
-    this.refreshContactInfo();     
-   });
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(" Dialog was closed ")
+      console.log(result)
+      this.refreshContactInfo();     
+    });
   }
 
   deleteContact( contact_id: string ) {
@@ -106,5 +112,72 @@ export class ProfileComponent implements OnInit {
       console.log(this.doctorInfo);
     } )
   }
+
+  refreshBasicInfo(){
+    this.doctorService.getDoctorInfo().subscribe( result => {
+      this.doctorInfo.info = [];
+      this.doctorInfo.info =  result.info ;
+      console.log(this.doctorInfo);
+    } )
+  }
+
+  refreshServiceInfo(){
+    this.doctorService.getDoctorInfo().subscribe( result => {
+      this.doctorInfo.services = [];
+      this.doctorInfo.services =  result.services ;
+      console.log(this.doctorInfo);
+    } )
+  }
+
+  openBasicModal( id, name, email, notes ) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: id,      
+      title: 'Basic Information',
+      name: name,
+      email: email,
+      notes: notes
+    };
+  
+    const dialogRef = this.dialog.open( BasicInfoComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(" Dialog was closed ")
+      console.log(result)
+      this.refreshBasicInfo()
+    });
+  }
+
+  openServicesModal( id, serviceImage, name, price ) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: id,      
+      title: 'Doctor Services Information',
+      name: name,
+      price: price,
+      imageURL: serviceImage,      
+      user: this.doctorID
+    };
+  
+    const dialogRef = this.dialog.open( DoctorServicesComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(" Dialog was closed ");
+      console.log(result);
+      this.refreshServiceInfo();
+    });
+  }
+
+  deleteService( service_id: string ) {    
+    this.services.delete( service_id )
+      .subscribe( data => {
+        console.log( 'contacto eliminado' );
+        console.log( data );
+        this.refreshServiceInfo();
+      } )
+  }
+
 
 }

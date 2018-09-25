@@ -1,8 +1,16 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+
 import { environment } from '../../environments/environment';
+
 import { AuthService } from '../services/auth.service';
-import { Observable } from 'rxjs';
+
+export interface profileInfo {
+  info: any;
+  contact: any;
+  services: any;
+
+}
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +24,18 @@ export class DoctorService {
    }
 
   getDoctorInfo() {
-    return this.http.get(`${environment.base_api}/doctor/${this.doctorID}`);
+    return this.http.get<profileInfo>(`${environment.base_api}/doctor/${this.doctorID}`);
   }
 
+  updateDoctorInfo( id:string, info:any ) {
+    return this.http.patch(`${environment.base_api}/users/${id}`, info);
+  }
+
+  saveDoctorInfo( info:any ) {
+    info.roles = ["Doctor"];
+    info.active = false;
+
+    return this.http.patch(`${environment.base_api}/users/`, info);
+  }
 
 }

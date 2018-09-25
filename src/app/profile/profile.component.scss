@@ -9,11 +9,18 @@ button.mat-flat-button.mat-primary {
     width: 49%;
     margin: 0.5%;
 }
+.basic-info {
+    span.email i {
+        margin-bottom: 0em;
+        padding: 1em 10px 1em 0em;
+    }
+}
 .contact {
     padding-bottom: 7px;
     button.add_contact {
         width: 100%;
         margin-top: 1em;
+        text-transform: uppercase;
     }
     ul {
         margin:0;
@@ -21,6 +28,9 @@ button.mat-flat-button.mat-primary {
         li {
             display: grid;
             grid-template-columns: 75% 25%;
+            span {
+                padding-right: 1em;
+            }
             div {
                 align-self: center;
             }
@@ -33,7 +43,53 @@ button.mat-flat-button.mat-primary {
                 margin-left: 0px;
                 align-self: center;
                 justify-self: center;
+                text-transform: uppercase;
             }
+        }
+    }
+}
+
+.services {
+    h5 {
+        width: auto;
+        display: inline-block;
+    }
+    button.add_service {
+        width: auto !important;
+        text-transform: uppercase;
+    }
+    ul.Servicelist {
+        margin-top: 2.5em;
+        display: grid;
+        grid-template-columns: 49% 49%;
+        list-style-type: none;
+        margin-left: 0px;
+        padding-left: 0px;
+
+        li {
+            margin: 1em 0.5%;
+            display: grid;            
+            grid-template-columns: 30% 70%;
+            border-radius: 4px;
+            box-shadow: 5px 5px 10px #ccc;
+            padding-bottom: 0px;
+            
+            span {
+                align-self: center;
+            }
+
+            img {
+                width: 100%;
+                object-fit: cover;
+                object-position: center;
+                margin: 0px;                                
+                padding-right: 15px !important;
+                height: 100%;
+            }
+
+            .actionws {
+                align-self: center;
+            }   
         }
     }
 }

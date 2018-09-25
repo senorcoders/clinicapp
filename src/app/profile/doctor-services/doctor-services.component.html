@@ -1,0 +1,28 @@
+<h2 mat-dialog-title>{{modalTitle}}</h2>
+<form [formGroup]="addServiceForm" (ngSubmit)="saveService()">
+<mat-dialog-content>
+  Do you wish to update your profile image?
+  <br><input type="file" name="avatar" (change)="onFileSelected($event)"><br>
+  <mat-form-field class="example-full-width">
+    <input formControlName="name" matInput placeholder="Name">
+    <!--<div *ngIf="submitted && addContactForm.controls.value.errors" class="error">
+      <div *ngIf="addContactForm.controls.value.errors.required">Value is required</div>
+    </div>-->
+  </mat-form-field>
+
+  <mat-form-field class="example-full-width">
+    <input formControlName="price" matInput placeholder="Price">
+    <!--<div *ngIf="submitted && addContactForm.controls.value.errors" class="error">
+      <div *ngIf="addContactForm.controls.value.errors.required">Value is required</div>
+    </div>-->
+  </mat-form-field>
+
+  <input formControlName="user" type="hidden" placeholder="user" >
+      
+</mat-dialog-content>
+<mat-dialog-actions>
+ <button mat-flat-button mat-dialog-close>Cancel</button>
+ <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.-->
+ <button mat-flat-button (click)="saveService()" [mat-dialog-close]="true">Save</button>
+</mat-dialog-actions>
+</form>
