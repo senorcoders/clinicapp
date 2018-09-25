@@ -32,6 +32,8 @@ import { AuthService } from './services/auth.service';
 import { InterceptService } from './services/intercept.service';
 import { CanActivateViaAuthGuardService } from './services/can-activate-via-auth-guard.service';
 import { AuthGuard } from './auth.guard';
+import { DoctorServicesComponent } from './profile/doctor-services/doctor-services.component';
+import { BasicInfoComponent } from './profile/basic-info/basic-info.component';
 
 const routes: Route[] =[
   {
@@ -74,7 +76,9 @@ const routes: Route[] =[
     CheckupsComponent,
     PrescriptionComponent,
     ContactComponent,
-    LoginComponent
+    LoginComponent,
+    DoctorServicesComponent,
+    BasicInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -85,7 +89,7 @@ const routes: Route[] =[
     BrowserAnimationsModule,
     MyMaterialModule
   ],
-  entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, ContactComponent],
+  entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, ContactComponent, BasicInfoComponent, DoctorServicesComponent],
   providers: [CategoriesService, PostsListService, DoctorService, AuthService,
   {
     provide: HTTP_INTERCEPTORS,
