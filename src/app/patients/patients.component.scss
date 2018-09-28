@@ -1,27 +1,56 @@
 .patient-list {
+    .card {
+        box-shadow: 1px 1px 0px #ccc;
+    }
+    .add_patient {
+        margin-left: 10px;
+        text-transform: uppercase;
+    }
     ul {
         list-style-type: none;
         margin:  0px;
         padding: 0px;
         li {
             margin-bottom: 0.5em;
+
             .card {
                 display: grid;
-                grid-template-columns: 25% auto auto;
+                grid-template-areas: "image name"
+                                     "image email"                                     
+                                     "image age";
+                grid-template-columns: 25% auto;
                 border: none;
                 overflow: hidden;
+
+                &:hover{
+                    background-color: #359cf0;
+                    color: #fff;
+                    cursor: pointer;
+                }
+
+                span {
+                    font-size: 0.8em;
+                }
     
                 .mat-card-image {
+                    grid-area: image;
                     width: 100%;
                     margin: 0px !important;
+                    padding-right: 15px;
                 }
                 span.name {
-                    align-self: center;
-                    padding-left: 10px;
+                    grid-area: name;
+                    align-self: center;                    
+                }
+                span.email {
+                    grid-area: email;
+                }
+                span.notes {
+                    grid-area: notes;
                 }
                 span.age {
+                    grid-area: age;
                     align-self: center;
-                    text-align: right
                 }
             }
         }
@@ -30,6 +59,13 @@
 
 .patient-info {
     border-left: solid 1px #ccc;
+
+    img {
+        margin: 0px;
+        padding: 0px;
+        width: 100%;
+    }
+
     .patient-form {
         display: grid;
         grid-template-areas:    "name      email      phone"
@@ -37,6 +73,19 @@
                                 "notes     notes      notes"
                                 "city      state      postal"
                                 "btn_photo btn_info   btn_contact";
+
+        @media screen and (max-width: 1200px) {
+            grid-template-areas:    "name"
+                                    "email"
+                                    "phone"
+                                    "address"
+                                    "notes"
+                                    "city"
+                                    "state"
+                                    "btn_photo btn_info"
+                                    "btn_contact";
+        }
+        
         mat-form-field, button {
             width: 97%
         }

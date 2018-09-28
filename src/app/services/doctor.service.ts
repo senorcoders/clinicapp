@@ -38,4 +38,8 @@ export class DoctorService {
     return this.http.patch(`${environment.base_api}/users/`, info);
   }
 
+  getMyPatients(doctor_id: string) {
+    return this.http.get(`${environment.base_api}/doctor/${doctor_id}/patients`);
+  }
+
 }

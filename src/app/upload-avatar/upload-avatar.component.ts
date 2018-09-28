@@ -13,11 +13,14 @@ export class UploadAvatarComponent implements OnInit {
   modalTitle: string;
   appointmentID: number;
   selectedFile: File = null;
-  doctorID: string;
+  id: string;
   constructor( @Inject( MAT_DIALOG_DATA ) public data: any, private http: HttpClient, authservice: AuthService ) { 
-    this.modalTitle = data.title;
-    this.appointmentID = data.id;
-    this.doctorID = authservice.doctorID;
+    this.modalTitle = data.title;    
+    if( data.hasOwnProperty("id") ){
+      this.id = data.id;
+    }else {
+      this.id = authservice.doctorID;
+    }
     console.log(data);
   }
 
@@ -31,7 +34,7 @@ export class UploadAvatarComponent implements OnInit {
   onUpload( event ) {    
     const fd = new FormData();
     fd.append('avatar', this.selectedFile);
-    this.http.post(`${environment.base_api}/users/${this.doctorID}/avatar`, fd)
+    this.http.post(`${environment.base_api}/users/${this.id}/avatar`, fd)
       .subscribe( res => {
           console.log( res );
       } )

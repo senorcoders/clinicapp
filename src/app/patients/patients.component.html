@@ -3,44 +3,36 @@
     <div class="col-md-12">
       <mat-card class="patient">  
         <div class="row">
-          <div class="col-md-3 patient-list">
+          <div class="col-md-4 col-sm-4 patient-list">
             <h5>Patient List</h5>
+            
             <mat-form-field class="example-full-width">
-                <input matInput placeholder="Filter by name" value="">
-              </mat-form-field>
-            <ul>
-              <li>
-                <div class="card">
-                  <img (click)="openModal()" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                  <span class="name">Teo Espinoza</span>
+              <input matInput placeholder="Filter by name" value="">
+            </mat-form-field>
+            <button class="add_patient" color="primary" mat-flat-button (click)="openAddPatientModal()" >Add Patient</button>
+            <ul class="patientList">
+              <li  *ngFor="let patient of patientsList" >
+                <div (click)="selectPatient(patient.id)" class="card">
+                  <img  mat-card-image src="{{patient.avatarURL}}" alt="Photo of a Shiba Inu">
+                  <span class="name">{{patient.name}}</span>
+                  <span class="email">{{patient.email}}</span>
                   <span class="age">4 Years Old</span></div>
               </li>
-              <li>
-                <div class="card">
-                  <img (click)="openModal()" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                  <span class="name">Rene Espinoza</span>
-                  <span class="age">28 Years Old</span></div>
-              </li>
-              <li>
-                <div class="card">
-                  <img (click)="openModal()" mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-                  <span class="name">Sebastian Espinoza</span>
-                  <span class="age">4 Years Old</span></div>
-              </li>
+              
             </ul>
           </div>
-          <div class="col-md-9 patient-info">
+          <div class="col-md-8 col-sm-8 patient-info">
             <div class="box">
               <h5>Patient Info</h5>
               <div class="row">
                 <div class="col-md-4">
-                  <img src="https://via.placeholder.com/300x350">
+                  <img src="{{patientInfo.avatarURL}}">
                   
                 </div>
                 <div class="col-md-8">
                   <form class="patient-form">
                     <mat-form-field class="example-full-width name">
-                      <input matInput class="" placeholder="Patient Name" value="Senorcoders Name">
+                      <input matInput class="" placeholder="Patient Name" value="{{patientInfo.name}}">
                     </mat-form-field>
                   
                     <mat-form-field class="example-full-width email">
@@ -70,7 +62,7 @@
                       <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
                     </mat-form-field>
                     <br>
-                    <button class="btn_photo" color="primary" mat-flat-button>Update Photo</button>
+                    <button (click)="openAvatarModal()" class="btn_photo" color="primary" mat-flat-button>Update Photo</button>
                     <button class="btn_info" color="primary" mat-flat-button>Update Info</button>
                     <button class="btn_contact" color="primary" mat-flat-button>View Contact Info</button>
                   </form>

@@ -1,0 +1,49 @@
+<h2 mat-dialog-title>{{modalTitle}}</h2>
+<form [formGroup]="addPatientForm" (ngSubmit)="savePatient()">
+  <mat-dialog-content>
+    <div class="container-fluid">
+      <div class="row">        
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input formControlName="name" matInput placeholder="Name">              
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+              <input formControlName="birthday" matInput [matDatepicker]="picker" placeholder="Birthday">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+              <input formControlName="email" matInput placeholder="Email">
+            </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <input formControlName="phone" matInput placeholder="Phone">
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <textarea formControlName="address" rows="8" matInput placeholder="Address"></textarea>
+          </mat-form-field>
+        </div>
+        <div class="col-md-6">
+          <mat-form-field class="example-full-width">
+            <textarea formControlName="notes" rows="8" matInput placeholder="Notes"></textarea>
+          </mat-form-field>
+        </div>        
+      </div>
+    </div>
+    
+    
+    <input  type="hidden" placeholder="user" >
+      
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close>Cancel</button>    
+    <button mat-flat-button (click)="savePatient()" [mat-dialog-close]="true">Save</button>
+  </mat-dialog-actions>
+</form>

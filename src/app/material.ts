@@ -1,5 +1,7 @@
 
-import {MatButtonModule} from '@angular/material';
+import {MatButtonModule } from '@angular/material';
+import {MatNativeDateModule, MatSliderModule, DateAdapter} from '@angular/material';
+
 import { NgModule } from '@angular/core';
 
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -17,10 +19,11 @@ import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule } from '@angular/material/datepicker';
 
 
 @NgModule({
-  imports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTreeModule, MatExpansionModule, MatTableModule, MatDialogModule, MatInputModule, MatAutocompleteModule, MatSlideToggleModule, MatFormFieldModule, MatSelectModule],
-  exports: [MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTreeModule, MatExpansionModule, MatTableModule, MatDialogModule, MatInputModule, MatAutocompleteModule, MatSlideToggleModule, MatFormFieldModule, MatSelectModule],
+  imports: [ MatSliderModule, MatNativeDateModule, MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTreeModule, MatExpansionModule, MatTableModule, MatDialogModule, MatInputModule, MatAutocompleteModule, MatSlideToggleModule, MatFormFieldModule, MatSelectModule, MatDatepickerModule],
+  exports: [ MatSliderModule, MatNativeDateModule, MatButtonModule, MatCheckboxModule, MatToolbarModule, MatIconModule, MatMenuModule, MatCardModule, MatSidenavModule, MatTreeModule, MatExpansionModule, MatTableModule, MatDialogModule, MatInputModule, MatAutocompleteModule, MatSlideToggleModule, MatFormFieldModule, MatSelectModule, MatDatepickerModule],
 })
 export class MyMaterialModule { }

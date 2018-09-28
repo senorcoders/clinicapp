@@ -58,17 +58,7 @@ export class DoctorServicesComponent implements OnInit {
   }
 
   saveService() {
-    if( this.id != '' ) {
-      this.doctorService.update( this.id, this.addServiceForm.value )
-      .subscribe( data => {
-        console.log( data );
-        if( this.selectedFile !== null ) {
-          if( data.hasOwnProperty('id') ){
-            this.onUpload( data.id )
-          }
-        }                
-      } )
-    }else {
+    if( this.id == null ) {
       this.doctorService.save( this.addServiceForm.value )
       .subscribe( data => {
         console.log( data );
@@ -78,7 +68,16 @@ export class DoctorServicesComponent implements OnInit {
           }
         }        
       } )
-    }
-    
+    }else {
+      this.doctorService.update( this.id, this.addServiceForm.value )
+      .subscribe( data => {
+        console.log( data );
+        if( this.selectedFile !== null ) {
+          if( data.hasOwnProperty('id') ){
+            this.onUpload( data.id )
+          }
+        }                
+      } )      
+    }    
   }
 }
