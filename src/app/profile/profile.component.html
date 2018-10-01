@@ -11,39 +11,39 @@
           </p>
         </mat-card-content>
         <mat-card-actions>
-          <button color="primary" (click)="openBasicModal( doctorInfo.info[0].id,  doctorInfo.info[0].name, doctorInfo.info[0].email, doctorInfo.info[0].notes )"  mat-flat-button>EDIT</button>
-          <button color="primary" (click)="openAvatarModal()" color="primary" mat-flat-button>UPDATE PHOTO</button>
+          <button color="primary" (click)="openBasicModal( doctorInfo.info[0].id,  doctorInfo.info[0].name, doctorInfo.info[0].email, doctorInfo.info[0].notes )"  mat-flat-button>EDITAR</button>
+          <button color="primary" (click)="openAvatarModal()" color="primary" mat-flat-button>ACTUALIZAR FOTO</button>
         </mat-card-actions>
       </mat-card>      
     </div>
     <div class="col-md-4">
         <mat-card class="contact">  
-          <h5>Contact Information</h5>
+          <h5>Informacion de Contacto</h5>
           <ul class="list">
             <li *ngFor="let contct of doctorInfo.contact">
               <span>
                   <i class="{{contct.typo}}" ></i>
                   {{contct.value}}
               </span>
-              <div>
+              <div class="contact_actions">
                   <button mat-flat-button color="primary" (click)="openContactModal( contct.id, contct.typo, contct.value )" ><i class="far fa-edit"></i> </button>
                   <button mat-flat-button color="primary" (click)="deleteContact( contct.id )" ><i class="fas fa-trash-alt"></i> </button>
               </div>
             </li>
           </ul>    
-          <button class="add_contact" color="primary" mat-flat-button (click)="openContactModal('','')" >Add Contact Information</button>        
+          <button class="add_contact" color="primary" mat-flat-button (click)="openContactModal('','')" >AÑADIR INFORMACION DE CONTACTOS</button>        
         </mat-card>
       </div>
     <div class="col-md-4">
       <mat-card class="example-card">  
-          <h5>Today Appointments</h5>
+          <h5>Proximas citas</h5>
       
       </mat-card>
     </div>
-    <div class="col-md-12">
+    <div class="col-md-4">
         <mat-card class="services">  
-          <h5>Services</h5>
-          <button class="add_service" color="primary" mat-flat-button (click)="openServicesModal()" >Add Service Information</button>
+          <h5>Servicios</h5>
+          <button class="add_service" color="primary" mat-flat-button (click)="openServicesModal()" >Añadir Servicio</button>
           
           <ul class="Servicelist">
             <li *ngFor="let service of doctorInfo.services">
@@ -61,6 +61,25 @@
           </ul>    
           
         </mat-card>
+    </div>
+    <div class="col-md-8">
+      <mat-card class="schooling">
+        <h5>Estudios</h5>
+        <button class="add_service" color="primary" mat-flat-button (click)="openSchoolingModal()" >Añadir Estudio</button>
+
+        <ul>
+          <li  *ngFor="let schooling of doctorInfo.schooling">
+            <img mat-card-image alt="{{schooling.title}}" src="{{schooling.imageURL}}">
+            <h5>{{schooling.title}}</h5>
+            <span class="school">{{schooling.school}}</span>
+            <span class="year">{{schooling.year}}</span>
+            <div class="actions">
+              <button mat-flat-button color="primary" (click)="openSchoolingModal( schooling.id, schooling.imageURL, schooling.title, schooling.school, schooling.year )" ><i class="far fa-edit"></i> </button>
+              <button mat-flat-button color="primary" (click)="deleteSchooling( schooling.id )" ><i class="fas fa-trash-alt"></i> </button>
+          </div>
+          </li>
+        </ul>
+      </mat-card>
     </div>
   </div>
 </div>

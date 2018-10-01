@@ -6,11 +6,14 @@ import { UploadAvatarComponent } from '../upload-avatar/upload-avatar.component'
 import { ContactComponent } from '../contact/contact.component';
 import { BasicInfoComponent } from './basic-info/basic-info.component';
 import { DoctorServicesComponent } from './doctor-services/doctor-services.component';
+import { SchoolingComponent } from '../schooling/schooling.component';
 
 import { AuthService } from '../services/auth.service';
 import { DoctorService } from '../services/doctor.service'
 import { ContactService } from '../services/contact.service';
 import { DoctorServicesService } from '../services/doctor-services.service';
+import { SchoolingService } from '../services/schooling.service';
+
 
 import { environment } from '../../environments/environment';
 
@@ -42,7 +45,7 @@ export class ProfileComponent implements OnInit {
   doctorInfo: any;
   
 
-  constructor( public dialog: MatDialog, private authService: AuthService, private router: Router, private doctorService: DoctorService, private contactService: ContactService, private services: DoctorServicesService ) { 
+  constructor( public dialog: MatDialog, private authService: AuthService, private router: Router, private schoolingService: SchoolingService, private doctorService: DoctorService, private contactService: ContactService, private services: DoctorServicesService ) { 
     this.doctorID = authService.doctorID;
     this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
     this.doctorService.getDoctorInfo().subscribe( result => {
@@ -65,7 +68,7 @@ export class ProfileComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
     id: this.doctorID,
-    title: 'Update Avatar Image'
+    title: 'Actualizar foto de perfil'
     };
    const dialogRef = this.dialog.open(UploadAvatarComponent, dialogConfig);
    dialogRef.afterClosed().subscribe(result => {
@@ -83,7 +86,7 @@ export class ProfileComponent implements OnInit {
     dialogConfig.data = {
       id: this.doctorID,
       contactID: contact_id,
-      title: 'Contact Information',
+      title: 'Informacion de Contacto',
       typo: typo,
       value: value
     };
@@ -135,7 +138,7 @@ export class ProfileComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       id: id,      
-      title: 'Basic Information',
+      title: 'Informacion Basica',
       name: name,
       email: email,
       notes: notes
@@ -155,7 +158,7 @@ export class ProfileComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
       id: id,      
-      title: 'Doctor Services Information',
+      title: 'Servicios',
       name: name,
       price: price,
       imageURL: serviceImage,      
@@ -179,5 +182,40 @@ export class ProfileComponent implements OnInit {
       } )
   }
 
+  deleteSchooling( schooling_id: string) {
+    this.schoolingService.delete( schooling_id )
+      .subscribe( data => {
+        this.refreshSchoolingInfo();
+      } )
+  }
+
+  openSchoolingModal( id, schoolingImage, name, school, year ) {
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: id,            
+      title: name,
+      school: school,
+      year: year,
+      imageURL: schoolingImage,
+      user: this.doctorID
+    };
+  
+    const dialogRef = this.dialog.open( SchoolingComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(" Dialog was closed ");
+      console.log(result);
+      this.refreshSchoolingInfo();
+    });
+  }
+
+  refreshSchoolingInfo(){
+    this.doctorService.getDoctorInfo().subscribe( result => {
+      this.doctorInfo.schooling = [];
+      this.doctorInfo.schooling =  result.schooling ;
+      console.log(this.doctorInfo);
+    } )
+  }
 
 }

@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
@@ -26,7 +26,7 @@ export class DoctorServicesComponent implements OnInit {
   imageURL: string;
   addServiceForm: FormGroup;
 
-  constructor( @Inject( MAT_DIALOG_DATA ) public data: any, private formBuilder: FormBuilder, private http: HttpClient, private authservice: AuthService, private doctorService: DoctorServicesService ) { 
+  constructor( private  dialogRef: MatDialogRef<DoctorServicesComponent>, @Inject( MAT_DIALOG_DATA ) public data: any, private formBuilder: FormBuilder, private http: HttpClient, private authservice: AuthService, private doctorService: DoctorServicesService ) { 
     this.modalTitle = data.title;    
     this.doctorID = authservice.doctorID;
     this.name = data.name;
@@ -52,9 +52,15 @@ export class DoctorServicesComponent implements OnInit {
     const fd = new FormData();
     fd.append('serviceImage', this.selectedFile);
     this.http.post(`${environment.base_api}/services/${service_id}/image`, fd)
-      .subscribe( res => {
+      .subscribe( 
+        res => {
           console.log( res );
-      } )
+          this.dialogRef.close();
+        },
+        error => {
+          this.dialogRef.close();
+        }
+      )
   }
 
   saveService() {
@@ -65,6 +71,8 @@ export class DoctorServicesComponent implements OnInit {
         if( this.selectedFile !== null ) {
           if( data.hasOwnProperty('id') ){
             this.onUpload( data.id )
+          }else{
+            this.dialogRef.close();
           }
         }        
       } )
@@ -75,6 +83,8 @@ export class DoctorServicesComponent implements OnInit {
         if( this.selectedFile !== null ) {
           if( data.hasOwnProperty('id') ){
             this.onUpload( data.id )
+          }else{
+            this.dialogRef.close();
           }
         }                
       } )      

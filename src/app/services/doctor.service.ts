@@ -9,7 +9,7 @@ export interface profileInfo {
   info: any;
   contact: any;
   services: any;
-
+  schooling: any;
 }
 
 @Injectable({

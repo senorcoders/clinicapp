@@ -28,18 +28,23 @@ button.mat-flat-button.mat-primary {
         li {
             display: grid;
             grid-template-columns: 75% 25%;
+            box-shadow: 2px 1px 0px #ccc;
+            margin-bottom: 10px;
             span {
                 padding-right: 1em;
             }
             div {
                 align-self: center;
+                display: grid;
+                grid-template-columns: 50% 50%;
+                grid-gap: 1px;            
             }
             .i, span {
                 color: #00639d;
                 align-self: center;
             }
             button.mat-flat-button.mat-primary {
-                min-width: 49%;
+                min-width: 100%;
                 margin-left: 0px;
                 align-self: center;
                 justify-self: center;
@@ -61,7 +66,7 @@ button.mat-flat-button.mat-primary {
     ul.Servicelist {
         margin-top: 2.5em;
         display: grid;
-        grid-template-columns: 49% 49%;
+        grid-template-columns: 100%;
         list-style-type: none;
         margin-left: 0px;
         padding-left: 0px;
@@ -90,6 +95,68 @@ button.mat-flat-button.mat-primary {
             .actionws {
                 align-self: center;
             }   
+        }
+    }
+}
+
+.schooling {
+    h5 {
+        width: auto;
+        display: inline-block;
+    }
+    button.add_service {
+        width: auto !important;
+        text-transform: uppercase;
+    }
+    ul {
+        list-style-type: none;
+        margin-left: 0px;
+        padding-left: 0px;
+        display: grid;
+        grid-template-columns: 50% 50%;
+        grid-gap: 1em;
+
+        li {
+            display: grid;
+            grid-template-areas: "image   image"
+                                 "title   year"
+                                 "school  year"
+                                 "actions actions";
+            grid-template-columns: 85% 15%;
+            box-shadow: 1px 1px 1px #ccc;
+            grid-auto-rows: min-content;
+            justify-self: end;
+            align-self: end;
+
+            img {
+                grid-area: image;
+                margin: 0px;
+                padding: 0px;
+                width: 100%;
+            }
+            h5 {
+                grid-area: title;
+                align-self: center;
+                justify-self: left;
+                margin: 0px;
+            }
+            .school {
+                grid-area: school;
+                align-self: center;
+                justify-self: left;
+            }
+            .year {
+                grid-area: year;
+                align-self: center;
+                justify-self: center;
+            }
+            .actions {
+                grid-area: actions;
+                align-self: end;
+                button {
+                    margin-bottom: 5px !important;
+                }
+            }
         }
     }
 }
