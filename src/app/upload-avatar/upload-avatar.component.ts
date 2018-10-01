@@ -1,5 +1,5 @@
 import { Component, OnInit, Inject  } from '@angular/core';
-import { MAT_DIALOG_DATA } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
@@ -14,7 +14,7 @@ export class UploadAvatarComponent implements OnInit {
   appointmentID: number;
   selectedFile: File = null;
   id: string;
-  constructor( @Inject( MAT_DIALOG_DATA ) public data: any, private http: HttpClient, authservice: AuthService ) { 
+  constructor(private  dialogRef: MatDialogRef<UploadAvatarComponent>, @Inject( MAT_DIALOG_DATA ) public data: any, private http: HttpClient, authservice: AuthService ) { 
     this.modalTitle = data.title;    
     if( data.hasOwnProperty("id") ){
       this.id = data.id;
@@ -35,8 +35,15 @@ export class UploadAvatarComponent implements OnInit {
     const fd = new FormData();
     fd.append('avatar', this.selectedFile);
     this.http.post(`${environment.base_api}/users/${this.id}/avatar`, fd)
-      .subscribe( res => {
+      .subscribe( 
+        res => {
           console.log( res );
-      } )
+          this.dialogRef.close();
+        },
+        error => {
+          console.log( error );
+          this.dialogRef.close();
+        } 
+      )
   }
 }

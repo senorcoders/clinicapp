@@ -1,9 +1,9 @@
 <h2 mat-dialog-title>{{modalTitle}} </h2>
-<mat-dialog-content>Do you wish to update your profile image?
+<mat-dialog-content>Deseas Actualizar la imagen?
   <br><input type="file" name="avatar" (change)="onFileSelected($event)">
 </mat-dialog-content>
 <mat-dialog-actions>
- <button mat-flat-button mat-dialog-close>Cancel</button>
+ <button mat-flat-button mat-dialog-close>Cancelar</button>
  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.-->
- <button mat-flat-button [mat-dialog-close]="true" (click)="onUpload()">Upload</button>
+ <button mat-flat-button  (click)="onUpload()">Guardar</button>
 </mat-dialog-actions>

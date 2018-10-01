@@ -35,6 +35,7 @@ import { AuthGuard } from './auth.guard';
 import { DoctorServicesComponent } from './profile/doctor-services/doctor-services.component';
 import { BasicInfoComponent } from './profile/basic-info/basic-info.component';
 import { AddPatientComponent } from './patients/add-patient/add-patient.component';
+import { SchoolingComponent } from './schooling/schooling.component';
 
 const routes: Route[] =[
   {
@@ -80,7 +81,8 @@ const routes: Route[] =[
     LoginComponent,
     DoctorServicesComponent,
     BasicInfoComponent,
-    AddPatientComponent
+    AddPatientComponent,
+    SchoolingComponent
   ],
   imports: [
     BrowserModule,
@@ -91,7 +93,7 @@ const routes: Route[] =[
     BrowserAnimationsModule,
     MyMaterialModule
   ],
-  entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, ContactComponent, BasicInfoComponent, DoctorServicesComponent, AddPatientComponent],
+  entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, ContactComponent, BasicInfoComponent, DoctorServicesComponent, AddPatientComponent, SchoolingComponent],
   providers: [CategoriesService, PostsListService, DoctorService, AuthService,
   {
     provide: HTTP_INTERCEPTORS,

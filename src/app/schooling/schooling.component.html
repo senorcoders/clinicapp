@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Estudios</h2>
+<form [formGroup]="addSchoolingForm" (ngSubmit)="save()">
+<mat-dialog-content>
+  Deseas Actualizar la imagen del Estudio?
+  <br><input type="file" name="avatar" (change)="onFileSelected($event)"><br>
+  <mat-form-field class="example-full-width">
+    <input formControlName="title" matInput placeholder="Titulo">
+    <!--<div *ngIf="submitted && addContactForm.controls.value.errors" class="error">
+      <div *ngIf="addContactForm.controls.value.errors.required">Value is required</div>
+    </div>-->
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input formControlName="school" matInput placeholder="Centro Educativa">
+    <!--<div *ngIf="submitted && addContactForm.controls.value.errors" class="error">
+      <div *ngIf="addContactForm.controls.value.errors.required">Value is required</div>
+    </div>-->
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <input formControlName="year" type="number" matInput placeholder="Año">
+    <!--<div *ngIf="submitted && addContactForm.controls.value.errors" class="error">
+      <div *ngIf="addContactForm.controls.value.errors.required">Value is required</div>
+    </div>-->
+  </mat-form-field>
+
+  <input formControlName="user" type="hidden" placeholder="user" >
+      
+</mat-dialog-content>
+<mat-dialog-actions>
+ <button mat-flat-button mat-dialog-close>Cancelar</button>
+ <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.-->
+ <button mat-flat-button >Guardar</button>
+</mat-dialog-actions>
+</form>
