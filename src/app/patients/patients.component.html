@@ -3,17 +3,17 @@
     <div class="col-md-12">
       <mat-card class="patient">  
         <div class="row">
-          <div class="col-md-4 col-sm-4 patient-list">
-            <h5>Patient List</h5>
+          <div class="col-md-4 col-sm-12 patient-list">
+            <h5>Pacientes</h5>
             
-            <mat-form-field class="example-full-width">
-              <input matInput placeholder="Filter by name" value="">
+            <mat-form-field class="filtro">
+              <input matInput placeholder="Buscar por nombre" value="">
             </mat-form-field>
-            <button class="add_patient" color="primary" mat-flat-button (click)="openAddPatientModal()" >Add Patient</button>
+            <button class="add_patient" color="primary" mat-flat-button (click)="openAddPatientModal()" >Añadir Paciente</button>
             <ul class="patientList">
               <li  *ngFor="let patient of patientsList" >
                 <div (click)="selectPatient(patient.id)" class="card">
-                  <img  mat-card-image src="{{patient.avatarURL}}" alt="Photo of a Shiba Inu">
+                  <img  mat-card-image src="{{patient.avatarURL}}" alt="Foto del Paciente">
                   <span class="name">{{patient.name}}</span>
                   <span class="email">{{patient.email}}</span>
                   <span class="age">4 Years Old</span></div>
@@ -21,50 +21,41 @@
               
             </ul>
           </div>
-          <div class="col-md-8 col-sm-8 patient-info">
+          <div class="col-md-8 col-sm-12 patient-no-selected">
+              <h3>Selecciona un paciente de la lista de la izquierda </h3>
+          </div>
+          <div class="col-md-8 col-sm-12 patient-info">
             <div class="box">
-              <h5>Patient Info</h5>
+              <h5>Información del Paciente</h5>
               <div class="row">
                 <div class="col-md-4">
                   <img src="{{patientInfo.avatarURL}}">
                   
                 </div>
-                <div class="col-md-8">
-                  <form class="patient-form">
+                <div class="col-md-8">                  
+                  <form [formGroup]="updatePatientForm" class="patient-form">
                     <mat-form-field class="example-full-width name">
-                      <input matInput class="" placeholder="Patient Name" value="{{patientInfo.name}}">
+                      <input matInput class="" placeholder="Nombre"  formControlName="name">
                     </mat-form-field>
                   
                     <mat-form-field class="example-full-width email">
-                        <input class="" matInput placeholder="Email">
+                        <input class="" matInput placeholder="Correo"  formControlName="email">
                     </mat-form-field>
                     
                     <mat-form-field class="example-full-width phone">
-                      <input matInput class="" placeholder="Phone">
+                      <input matInput class="" placeholder="Telefono"  formControlName="phone">
                     </mat-form-field>
                     
 
                     <mat-form-field class="example-full-width address">
-                      <textarea matInput class="" placeholder="Address">1600 Amphitheatre Pkwy</textarea>
+                      <textarea matInput class="" placeholder="Dirección"  formControlName="address"></textarea>
                     </mat-form-field>
                     <mat-form-field class="example-full-width notes">
-                      <textarea matInput class="" placeholder="Notes"></textarea>
-                    </mat-form-field>
-
-                    <mat-form-field class="example-full-width city">
-                        <input matInput class="" placeholder="City">
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width state">
-                      <input matInput class="" placeholder="State">
-                    </mat-form-field>
-                    <mat-form-field class="example-full-width postal">
-                      <input matInput class="" #postalCode maxlength="5" placeholder="Postal Code" value="94043">
-                      <mat-hint align="end">{{postalCode.value.length}} / 5</mat-hint>
+                      <textarea matInput class="" placeholder="Notas"  formControlName="notes"></textarea>
                     </mat-form-field>
                     <br>
-                    <button (click)="openAvatarModal()" class="btn_photo" color="primary" mat-flat-button>Update Photo</button>
-                    <button class="btn_info" color="primary" mat-flat-button>Update Info</button>
-                    <button class="btn_contact" color="primary" mat-flat-button>View Contact Info</button>
+                    <button (click)="openAvatarModal()" class="btn_photo" color="primary" mat-flat-button>Actualizar Foto</button>
+                    <button class="btn_info" color="primary" mat-flat-button>Actualizar Informacion</button>                    
                   </form>
               </div>
               </div>              

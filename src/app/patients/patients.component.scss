@@ -1,3 +1,6 @@
+@import '../../sass/variable';
+@import '../../sass/mixins';
+
 .patient-list {
     .card {
         box-shadow: 1px 1px 0px #ccc;
@@ -57,8 +60,18 @@
     }
 }
 
+.patient-no-selected {
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 100%;  
+    align-self: center;    
+    justify-self: center;    
+    color: #888888;
+}
+
 .patient-info {
     border-left: solid 1px #ccc;
+    display: none;
 
     img {
         margin: 0px;
@@ -68,22 +81,22 @@
 
     .patient-form {
         display: grid;
-        grid-template-areas:    "name      email      phone"
-                                "address   address    address"
-                                "notes     notes      notes"
-                                "city      state      postal"
-                                "btn_photo btn_info   btn_contact";
+        grid-template-areas:    "name       name"
+                                "email      phone"
+                                "address    address"
+                                "notes      notes"                                
+                                "btn_photo  btn_info ";
+        grid-template-columns: 50% 50%;
 
-        @media screen and (max-width: 1200px) {
+        @include responsive(md) {
             grid-template-areas:    "name"
                                     "email"
                                     "phone"
                                     "address"
                                     "notes"
-                                    "city"
-                                    "state"
-                                    "btn_photo btn_info"
-                                    "btn_contact";
+                                    "btn_photo"
+                                    "btn_info";
+            grid-template-columns: 100%;
         }
         
         mat-form-field, button {
@@ -103,23 +116,15 @@
         }
         .notes {
             grid-area: notes;
-        }
-        .city {
-            grid-area: city;
-        }
-        .state {
-            grid-area: state;
-        }
-        .postal {
-            grid-area: postal;
-        }
+        }        
         .btn_photo {
             grid-area: btn_photo;
         }
         .btn_info {
             grid-area: btn_info;
+            margin-top: 5px;
         }
-        .btn_contact {
+        .btn_contact {            
             grid-area: btn_contact;
         }
         input {

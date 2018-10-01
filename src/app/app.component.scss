@@ -1,3 +1,6 @@
+@import '../sass/variable';
+@import '../sass/mixins';
+
 .clinicapp {
     .icon {
         padding: 0 2em 0 0px;
@@ -17,9 +20,17 @@
     }
     .logged_in_users {
         display: grid;
+        grid-template-areas: "sidebar main";
         grid-template-columns: minmax(auto, max-content) auto;
         height: 100vh;
+        @include responsive(md) {
+            grid-template-areas: "sidebar"
+                                 "main";
+            grid-template-columns: 100%;            
+            grid-template-rows: min-content auto;
+        }
         .sidebar {
+            grid-area: sidebar;
             padding-left: 15px;
             padding-right: 15px;
             padding-top: 20px;
@@ -32,8 +43,14 @@
             background: linear-gradient(to bottom, #359cf0 0%, #359cf0 51%, #4dc9fa 100%);
             filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#359cf0', endColorstr='#4dc9fa', GradientType=0 );
 
+            @include responsive(md){
+                padding: 0px;
+                align-self: end;
+            }
+
         }
         .main-content {
+            grid-area: main;
             padding-top: 20px;
             background-color: #e6e6e6;
         }

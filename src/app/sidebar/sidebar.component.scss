@@ -1,52 +1,57 @@
+@import '../../sass/variable';
+@import '../../sass/mixins';
+
 .icon{
     margin-right: 1em;
 }
-a {
-    color: #deebf2 !important;
-    width: 100%;
-    display: grid;
-    text-decoration: none;
-    cursor: pointer;
-    &:hover{
-        color: #f3463f !important;                 
+mat-accordion {
+
+    @include responsive(md){
+        display: grid;
+        grid-template-columns: 16.6% 16.6% 16.6% 16.6% 16.6% 16.6%;
+        
     }
-    
-    text-align: center;
-    padding: 0.75em 0em;
-    margin: 0px !important;
-    &.active-link i, &.active-link span{
-        color: #f3463f;
-    }
-    span {
+
+    a {
+        color: #deebf2 !important;
+        width: 100%;
+        display: grid;
+        text-decoration: none;
+        cursor: pointer;
+
+        @include responsive(md){
+            border: solid 1px #deebf2;
+
+            .fa-2x {
+                font-size: 1.8em;
+            }
+            
+        }
+
+        &:hover{
+            color: #f3463f !important;                 
+        }
+        
         text-align: center;
-        text-transform: uppercase;
-        font-size: 0.75em;
-        font-weight: 700;
-        margin-top: 0.5em;
+        padding: 0.75em 0em;
+        margin: 0px !important;
+        &.active-link i, &.active-link span{
+            color: #f3463f;
+        }
+        span {
+            text-align: center;
+            text-transform: uppercase;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-top: 0.5em;
+
+            @include responsive(md) {
+                font-size: 0.6em;
+            }
+        }
     }
 }
+
 .row.main-padding {
     padding: 0px;
 }
-/*.mat-expansion-panel:not([class*=mat-elevation-z]) {
-    box-shadow: 0 0px 0px 0px rgba(0,0,0,.2), 0 0px 0px 0 rgba(0,0,0,.14), 0 0px 0px 0 rgba(0,0,0,.12);
-}
-.mat-expansion-panel {
-    background: #00639d;
-    color: rgba(255, 255, 255, 0.87);
-}
-.mat-expansion-panel-header-title {
-    color: rgba(255, 255, 255, 0.87);
-}
-.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
-    color: rgba(255, 255, 255, 0.54) !important;
-}
-.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
-    color: rgba(255, 255, 255, 0.54);
-}
-
-
-.mat-expansion-indicator::after, .mat-expansion-panel-header-description {
-    color: rgba(255, 255, 255, 0.54);
-}
-*/

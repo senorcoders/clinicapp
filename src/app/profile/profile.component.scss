@@ -1,3 +1,6 @@
+@import '../../sass/variable';
+@import '../../sass/mixins';
+
 .row > div {
     margin-bottom: 15px;
 }
@@ -116,6 +119,10 @@ button.mat-flat-button.mat-primary {
         grid-template-columns: 50% 50%;
         grid-gap: 1em;
 
+        @include responsive(md) {
+            grid-template-columns: 100%;
+        }
+
         li {
             display: grid;
             grid-template-areas: "image   image"
@@ -128,6 +135,16 @@ button.mat-flat-button.mat-primary {
             justify-self: end;
             align-self: end;
 
+
+            @include responsive(md) {
+                grid-template-areas:    "image"
+                                        "title"
+                                        "school"
+                                        "year"
+                                        "actions";
+                grid-template-columns: 100%;
+            }
+
             img {
                 grid-area: image;
                 margin: 0px;
@@ -139,11 +156,18 @@ button.mat-flat-button.mat-primary {
                 align-self: center;
                 justify-self: left;
                 margin: 0px;
+                @include responsive(md) {
+                    justify-self: center;
+                    margin-top: 10px;
+                }
             }
             .school {
                 grid-area: school;
                 align-self: center;
                 justify-self: left;
+                @include responsive(md) {
+                    justify-self: center;
+                }
             }
             .year {
                 grid-area: year;

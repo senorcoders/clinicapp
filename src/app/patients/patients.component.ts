@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MatDialog, MatDialogConfig } from '@angular/material';
 import { Router } from '@angular/router';
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 
 import { AuthService } from '../services/auth.service';
 import { environment } from '../../environments/environment';
@@ -22,8 +23,10 @@ export class PatientsComponent implements OnInit {
   patientsList: any;
   selectedPatient: string;
   patientInfo: any;
+  updatePatientForm: FormGroup;  
+  name:string = '';
 
-  constructor( public dialog: MatDialog, private authService: AuthService, private router: Router, private doctorService: DoctorService, private patientService: PatientsService ) {
+  constructor( public dialog: MatDialog, private formBuilder: FormBuilder, private authService: AuthService, private router: Router, private doctorService: DoctorService, private patientService: PatientsService ) {
     this.doctorID = authService.doctorID;
     this.patientInfo = {
       name:'',
@@ -34,6 +37,15 @@ export class PatientsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.updatePatientForm = this.formBuilder.group( {      
+      name: [ this.name, Validators.required ],
+      birthday: [ '', Validators.required ],
+      email: [ '', Validators.required ],
+      phone: [ '', Validators.required ],      
+      address: [ '', Validators.required ],
+      notes: [ '', Validators.required ],
+      user: [ '', Validators.required ]
+    } )
     this.getPatienList();
   }
 
@@ -62,11 +74,22 @@ export class PatientsComponent implements OnInit {
   }
 
   selectPatient( patientID ) {
+    var noSelected = document.querySelector('.patient-no-selected') as HTMLElement;
+    noSelected.style.display = 'none';
+    var patientSelected = document.querySelector('.patient-info') as HTMLElement;
+    patientSelected.style.display = 'grid';
+
     this.selectedPatient = patientID;
     this.patientService.getPatient( patientID )
     .subscribe( patient => {
       console.info( patient[0] );
       this.patientInfo = patient[0];
+      this.name = patient[0].name;
+      this.updatePatientForm.controls['name'].patchValue(patient[0].name);
+      this.updatePatientForm.controls['email'].patchValue(patient[0].email);
+      //this.updatePatientForm.controls['phone'].patchValue(patient[0].phone);
+      this.updatePatientForm.controls['address'].patchValue(patient[0].address);
+      this.updatePatientForm.controls['notes'].patchValue(patient[0].notes);
     }  )
   }
 
@@ -76,7 +99,7 @@ export class PatientsComponent implements OnInit {
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
     id: this.selectedPatient,
-    title: 'Upload Patient Image'
+    title: 'Actualizar Imagen del Paciente'
     };
    const dialogRef = this.dialog.open( UploadAvatarComponent , dialogConfig );
    dialogRef.afterClosed().subscribe(result => {
