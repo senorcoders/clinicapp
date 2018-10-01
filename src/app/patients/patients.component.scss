@@ -81,18 +81,17 @@
 
     .patient-form {
         display: grid;
-        grid-template-areas:    "name       name"
-                                "email      phone"
-                                "address    address"
+        grid-template-areas:    "name       birthday"
+                                "email      phone"                                
                                 "notes      notes"                                
                                 "btn_photo  btn_info ";
         grid-template-columns: 50% 50%;
 
         @include responsive(md) {
             grid-template-areas:    "name"
+                                    "birthday"
                                     "email"
                                     "phone"
-                                    "address"
                                     "notes"
                                     "btn_photo"
                                     "btn_info";
@@ -104,6 +103,9 @@
         }
         .name {
             grid-area: name;            
+        }
+        .birthday {
+            grid-area: birthday;
         }
         .email {
             grid-area: email;            

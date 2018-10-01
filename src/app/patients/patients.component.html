@@ -37,6 +37,12 @@
                     <mat-form-field class="example-full-width name">
                       <input matInput class="" placeholder="Nombre"  formControlName="name">
                     </mat-form-field>
+
+                    <mat-form-field class="example-full-width birthday">
+                        <input formControlName="birthday" matInput [matDatepicker]="picker" placeholder="Fecha de Nacimiento">
+                        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                        <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
                   
                     <mat-form-field class="example-full-width email">
                         <input class="" matInput placeholder="Correo"  formControlName="email">
@@ -46,16 +52,12 @@
                       <input matInput class="" placeholder="Telefono"  formControlName="phone">
                     </mat-form-field>
                     
-
-                    <mat-form-field class="example-full-width address">
-                      <textarea matInput class="" placeholder="Dirección"  formControlName="address"></textarea>
-                    </mat-form-field>
                     <mat-form-field class="example-full-width notes">
                       <textarea matInput class="" placeholder="Notas"  formControlName="notes"></textarea>
                     </mat-form-field>
                     <br>
                     <button (click)="openAvatarModal()" class="btn_photo" color="primary" mat-flat-button>Actualizar Foto</button>
-                    <button class="btn_info" color="primary" mat-flat-button>Actualizar Informacion</button>                    
+                    <button class="btn_info" color="primary" (click)="actualizarInfo()" mat-flat-button>Actualizar Informacion</button>                    
                   </form>
               </div>
               </div>              

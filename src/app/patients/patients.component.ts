@@ -41,8 +41,7 @@ export class PatientsComponent implements OnInit {
       name: [ this.name, Validators.required ],
       birthday: [ '', Validators.required ],
       email: [ '', Validators.required ],
-      phone: [ '', Validators.required ],      
-      address: [ '', Validators.required ],
+      phone: [ '', Validators.required ],            
       notes: [ '', Validators.required ],
       user: [ '', Validators.required ]
     } )
@@ -73,13 +72,7 @@ export class PatientsComponent implements OnInit {
    });
   }
 
-  selectPatient( patientID ) {
-    var noSelected = document.querySelector('.patient-no-selected') as HTMLElement;
-    noSelected.style.display = 'none';
-    var patientSelected = document.querySelector('.patient-info') as HTMLElement;
-    patientSelected.style.display = 'grid';
-
-    this.selectedPatient = patientID;
+  refreshPatientInfo( patientID ){
     this.patientService.getPatient( patientID )
     .subscribe( patient => {
       console.info( patient[0] );
@@ -87,10 +80,20 @@ export class PatientsComponent implements OnInit {
       this.name = patient[0].name;
       this.updatePatientForm.controls['name'].patchValue(patient[0].name);
       this.updatePatientForm.controls['email'].patchValue(patient[0].email);
-      //this.updatePatientForm.controls['phone'].patchValue(patient[0].phone);
-      this.updatePatientForm.controls['address'].patchValue(patient[0].address);
+      this.updatePatientForm.controls['birthday'].patchValue(patient[0].birthday);
+      this.updatePatientForm.controls['phone'].patchValue(patient[0].phone);      
       this.updatePatientForm.controls['notes'].patchValue(patient[0].notes);
     }  )
+  }
+
+  selectPatient( patientID ) {
+    var noSelected = document.querySelector('.patient-no-selected') as HTMLElement;
+    noSelected.style.display = 'none';
+    var patientSelected = document.querySelector('.patient-info') as HTMLElement;
+    patientSelected.style.display = 'grid';
+
+    this.selectedPatient = patientID;
+    this.refreshPatientInfo( patientID );
   }
 
   openAvatarModal() {
@@ -111,4 +114,26 @@ export class PatientsComponent implements OnInit {
    });
   }
 
+  actualizarInfo() {
+    console.log( 'a punto de actualizar' );
+    var newinfo = {
+      name: this.updatePatientForm.controls['name'].value,
+      phone: this.updatePatientForm.controls['phone'].value,
+      birthday: this.updatePatientForm.controls['birthday'].value,
+      notes: this.updatePatientForm.controls['notes'].value,
+      email: this.updatePatientForm.controls['email'].value
+    }
+    console.log(newinfo);
+    this.patientService.update( this.selectedPatient, newinfo )
+      .subscribe(
+        res => {
+          this.refreshPatientInfo( this.selectedPatient );
+          console.log( res );
+        },
+        error => {
+          this.refreshPatientInfo( this.selectedPatient );
+          console.log( error );
+        }
+      )
+  }
 }
