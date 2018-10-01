@@ -37,3 +37,7 @@ testem.log
 # System Files
 .DS_Store
 Thumbs.db
+deploy.sh
+src/app/services/auth.service.ts
+src/environments/environment.ts
+src/environments/environment.prod.ts
