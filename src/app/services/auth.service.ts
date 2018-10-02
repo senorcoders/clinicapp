@@ -4,11 +4,13 @@ import { RequestOptions, Response } from '@angular/http';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Router } from '@angular/router';
 
+import { environment } from '../../environments/environment';
+
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  API_URL = 'http://localhost:7002/v1.0';
+  API_URL =  `${environment.base_api}/v1.0`;
   TOKEN_KEY = 'token';
   DOCTOR_ID = 'doctor_id';
 
