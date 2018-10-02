@@ -13,6 +13,8 @@ import { AddPatientComponent } from './add-patient/add-patient.component';
 
 import { UploadAvatarComponent } from '../upload-avatar/upload-avatar.component';
 
+var moment = require('moment');
+
 @Component({
   selector: 'tsel-patients',
   templateUrl: './patients.component.html',
@@ -50,6 +52,12 @@ export class PatientsComponent implements OnInit {
 
   getPatienList() {
     this.doctorService.getMyPatients( this.doctorID ).subscribe( result => {
+      var formatYear = result.map( function( patient ) {
+        if( moment(patient.birthday).isValid() ){
+          var years_old = moment().diff( patient.birthday , 'years');
+          patient.birthday = `${years_old} years old`;
+        }
+      } )
       this.patientsList =  result ;      
     } )
   }
@@ -72,8 +80,9 @@ export class PatientsComponent implements OnInit {
    });
   }
 
-  refreshPatientInfo( patientID ){
-    this.patientService.getPatient( patientID )
+  refreshPatientInfo(){
+    this.getPatienList();
+    this.patientService.getPatient( this.selectedPatient )
     .subscribe( patient => {
       console.info( patient[0] );
       this.patientInfo = patient[0];
@@ -93,7 +102,7 @@ export class PatientsComponent implements OnInit {
     patientSelected.style.display = 'grid';
 
     this.selectedPatient = patientID;
-    this.refreshPatientInfo( patientID );
+    this.refreshPatientInfo(  );
   }
 
   openAvatarModal() {
@@ -110,7 +119,14 @@ export class PatientsComponent implements OnInit {
     console.log(result)
      //document.querySelector(".doctorAvatar").src=`${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
      //this.doctorAvatar = `${environment.base_api}/users/avatar/${this.doctorID}?`+ new Date().getTime();
-    this.getPatienList();
+     var newImage = `${this.patientInfo.avatarURL}?`+ new Date().getTime();
+     this.patientsList.map( patient => {
+      if( patient.avatarURL == this.patientInfo.avatarURL ){
+        patient.avatarURL = newImage;
+      }
+     } )
+     this.patientInfo.avatarURL = newImage;
+     
    });
   }
 
@@ -127,11 +143,22 @@ export class PatientsComponent implements OnInit {
     this.patientService.update( this.selectedPatient, newinfo )
       .subscribe(
         res => {
-          this.refreshPatientInfo( this.selectedPatient );
+          this.refreshPatientInfo( );
+          
+          this.patientsList.map( patient => {
+            if( patient.id == this.selectedPatient ){
+              patient.name = newinfo.name;
+              patient.email = newinfo.email;
+              var years_old = moment().diff( newinfo.birthday , 'years');
+              patient.birthday = `${years_old} years old`;
+            }
+          } )
+
           console.log( res );
         },
         error => {
-          this.refreshPatientInfo( this.selectedPatient );
+          this.refreshPatientInfo( );
+          
           console.log( error );
         }
       )
