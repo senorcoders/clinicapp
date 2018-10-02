@@ -1,9 +1,9 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <div class="clinicapp">
-  <div *ngIf="!authService.isAuthenticated" class="login_form">
+  <div *ngIf="!isLogged()" class="login_form">
       <tsel-login></tsel-login>
   </div>
-  <div *ngIf="authService.isAuthenticated"  class="logged_in_users">
+  <div *ngIf="isLogged()"  class="logged_in_users">
     <div class="sidebar">
         <tsel-sidebar></tsel-sidebar>
     </div>

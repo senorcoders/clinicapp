@@ -39,7 +39,7 @@ export class DoctorService {
   }
 
   getMyPatients(doctor_id: string) {
-    return this.http.get(`${environment.base_api}/doctor/${doctor_id}/patients`);
+    return this.http.get<any[]>(`${environment.base_api}/doctor/${doctor_id}/patients`);
   }
 
 }

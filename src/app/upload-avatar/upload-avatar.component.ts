@@ -31,7 +31,7 @@ export class UploadAvatarComponent implements OnInit {
     console.log( event );
     this.selectedFile = event.target.files[0];
   }
-  onUpload( event ) {    
+  onUpload() {    
     const fd = new FormData();
     fd.append('avatar', this.selectedFile);
     this.http.post(`${environment.base_api}/users/${this.id}/avatar`, fd)

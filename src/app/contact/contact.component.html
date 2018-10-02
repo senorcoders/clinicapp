@@ -7,14 +7,14 @@
             {{typo.viewValue}}
           </mat-option>
         </mat-select>
-        <div *ngIf="submitted && addContactForm.controls.valtypoue.errors" class="error">
+        <div *ngIf="addContactForm.controls.valtypoue.errors" class="error">
             <div *ngIf="addContactForm.controls.typo.errors.required">Tipo es requerido</div>
           </div>
       </mat-form-field>
       
       <mat-form-field class="example-full-width">
         <input formControlName="value" matInput placeholder="Valor">
-        <div *ngIf="submitted && addContactForm.controls.value.errors" class="error">
+        <div *ngIf="addContactForm.controls.value.errors" class="error">
           <div *ngIf="addContactForm.controls.value.errors.required">Valor es requerido</div>
         </div>
       </mat-form-field>

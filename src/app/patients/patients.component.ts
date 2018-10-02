@@ -12,15 +12,14 @@ import { PatientsService } from '../services/patients.service';
 import { AddPatientComponent } from './add-patient/add-patient.component';
 
 import { UploadAvatarComponent } from '../upload-avatar/upload-avatar.component';
-
-var moment = require('moment');
+import * as moment from 'moment';
 
 @Component({
   selector: 'tsel-patients',
   templateUrl: './patients.component.html',
   styleUrls: ['./patients.component.scss']
 })
-export class PatientsComponent implements OnInit {
+export class PatientsComponent implements OnInit {  
   doctorID: string;
   patientsList: any;
   selectedPatient: string;

@@ -2,7 +2,7 @@
   <div class="row">
     <div class="col-md-4">
       <mat-card class="basic-info">  
-        <img (click)="openModal()" class="doctorAvatar" mat-card-image src="{{doctorAvatar}}" alt="Photo of a Shiba Inu">
+        <img (click)="openAvatarModal()" class="doctorAvatar" mat-card-image src="{{doctorAvatar}}" alt="Photo of a Shiba Inu">
         <mat-card-content>
           <h5>{{doctorInfo.info[0].name}}</h5>
           <span class="email"><i class="fas fa-envelope"></i>{{doctorInfo.info[0].email}}</span>
@@ -31,7 +31,7 @@
               </div>
             </li>
           </ul>    
-          <button class="add_contact" color="primary" mat-flat-button (click)="openContactModal('','')" >AÑADIR INFORMACION DE CONTACTOS</button>        
+          <button class="add_contact" color="primary" mat-flat-button (click)="openContactModal('','','')" >AÑADIR INFORMACION DE CONTACTOS</button>        
         </mat-card>
       </div>
     <div class="col-md-4">
@@ -43,7 +43,7 @@
     <div class="col-md-4">
         <mat-card class="services">  
           <h5>Servicios</h5>
-          <button class="add_service" color="primary" mat-flat-button (click)="openServicesModal()" >Añadir Servicio</button>
+          <button class="add_service" color="primary" mat-flat-button (click)="openServicesModal('','','','')" >Añadir Servicio</button>
           
           <ul class="Servicelist">
             <li *ngFor="let service of doctorInfo.services">
@@ -65,7 +65,7 @@
     <div class="col-md-8">
       <mat-card class="schooling">
         <h5>Estudios</h5>
-        <button class="add_service" color="primary" mat-flat-button (click)="openSchoolingModal()" >Añadir Estudio</button>
+        <button class="add_service" color="primary" mat-flat-button (click)="openSchoolingModal('','','','','')" >Añadir Estudio</button>
 
         <ul>
           <li  *ngFor="let schooling of doctorInfo.schooling">
