@@ -2,14 +2,14 @@
   <div class="row">
     <div class="col-md-12">
       <mat-card class="patient-search">
+       
           <form class="example-form">
             <mat-form-field class="example-full-width">
-              <input matInput placeholder="Select Patient" aria-label="Select Patient" [matAutocomplete]="auto" [formControl]="stateCtrl">
-              <mat-autocomplete #auto="matAutocomplete">
-                <mat-option *ngFor="let state of filteredStates | async" [value]="state.name">
-                  <img class="example-option-img" aria-hidden [src]="state.flag" height="25">
-                  <span>{{state.name}}</span> |
-                  <small>Population: {{state.population}}</small>
+              <input (change)="getPatientInfo" matInput placeholder="Seleccione un Paciente" aria-label="Select Patient" [matAutocomplete]="auto" [formControl]="stateCtrl">
+              <mat-autocomplete #auto="matAutocomplete" [displayWith]="displayFn">
+                <mat-option *ngFor="let patient of filteredStates | async " [value]="patient">                  
+                  <span>{{patient.name}}</span> |
+                  <small>{{patient.birthday}}</small>
                 </mat-option>
               </mat-autocomplete>
             </mat-form-field>
@@ -17,28 +17,25 @@
       </mat-card>
     </div>
   </div>
-  <div class="row">
+  <div class="row onlyWhenSelected">
     <div class="col-md-3">
         <mat-card class="patient-info">  
-        <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        <img mat-card-image src="{{selectedPatient.avatarURL}}" alt="{{selectedPatient.name}}">
         <mat-card-content>
-          <h5>Name</h5>
+          <h5>{{selectedPatient.name}}</h5>
           <br>
-            28 Años
+            {{selectedPatient.birthday}}
           <br>
-            Email: milton@senorcoders.com
+            Email: {{selectedPatient.email}}
           <br>
-            Phone: 123456789
+            Phone: {{selectedPatient.phone}}
           <br>
           <span>Notes:</span>
           <p>
-            About me.... The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-            A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-            bred for hunting.
+            {{selectedPatient.notes}}
           </p>
         </mat-card-content>
-        <mat-card-actions>          
-          <button color="primary" (click)="openAvatarModal()" color="primary" mat-flat-button>UPDATE PHOTO</button>
+        <mat-card-actions>                    
         </mat-card-actions>
       </mat-card>     
       
@@ -46,43 +43,45 @@
 
     <div class="col-md-3">
       <mat-card class="patient-appointments container-fluid">
-        <h6 class="title">Notes</h6>
-        <form class="notes-form">
+        <h6 class="title">Nueva Consulta</h6>
+        <form  [formGroup]="appointmentForm"  class="notes-form">
+            <input formControlName="doctor"  type="hidden" class="" placeholder="doctor">
+            <input formControlName="patient"  type="hidden" class="" placeholder="patient">
           <mat-form-field class="example-full-width weight">
-            <input matInput class="" placeholder="Weight">
+            <input formControlName="weight" matInput type="number" class="" placeholder="Peso (kg)">
           </mat-form-field>
           <mat-form-field class="example-full-width height">
-              <input matInput class="" placeholder="Height">
+              <input formControlName="height" matInput type="number" class="" placeholder="Altura (cm)">
             </mat-form-field>
           <mat-form-field class="example-full-width reason">
-              <textarea matInput class="" placeholder="Reason">Congestion Nasal</textarea>
+              <textarea formControlName="reason" matInput class="" rows="5" placeholder="Motivo de la Consulta"></textarea>
           </mat-form-field>
         
           <mat-form-field class="example-full-width notes">
-              <textarea matInput class="" placeholder="Address">Notes</textarea>
+              <textarea formControlName="notes" matInput class="" rows="5" placeholder="Observacion"></textarea>
           </mat-form-field>                
           <br>                
-          <button class="btn_save" color="primary" mat-flat-button>Save Info</button>                
+          <button class="btn_save" (click)="saveAppointment()" color="primary" mat-flat-button>Guardar</button>                
         </form>
       </mat-card>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 detail">
       <div class="row">
         <div class="col-md-12">
-            <mat-card class="patient-checkups container-fluid">
-              <h6>Checkups</h6>                                          
-                <br>                
-                <button (click)="openCheckupsModal()" class="btn_save" color="primary" mat-flat-button>Add Checkup</button>              
-            </mat-card>
-          </div>
-          <div class="col-md-12">
-            <mat-card class="patient-prescription container-fluid">
-              <h6>Prescription</h6>                            
-                <br>                
-                <button  (click)="openPrescriptionModal()"  class="btn_save" color="primary" mat-flat-button>Add Prescription</button>
-            </mat-card>
-          </div>
+          <mat-card class="patient-prescription container-fluid">
+            <h6>Tratamiento</h6>
+              <br>                
+              <button  (click)="openPrescriptionModal()"  class="btn_save" color="primary" mat-flat-button>Añadir Tratamiento</button>
+          </mat-card>
+        </div>
+        <div class="col-md-12">
+          <mat-card class="patient-checkups container-fluid">
+            <h6>Examenes</h6>                                          
+              <br>                
+              <button (click)="openCheckupsModal()" class="btn_save" color="primary" mat-flat-button>Añadir Examen</button>
+          </mat-card>
+        </div>          
       </div>
     </div>
     
@@ -90,47 +89,44 @@
     
 
   </div>
-  <div class="row">
+  <div class="row onlyWhenSelected historyContainer">
     <div class="col-md-12">
       <mat-card class="patient-history container-fluid">
-        <h6>History</h6>
+        <h6>Historia Clinica</h6>
         <div class="row">
           <div class="col-md-5 history">
-            <table mat-table [dataSource]="dataSource" class="mat-elevation-z0">
-
-              <!--- Note that these columns can be defined in any order.
-                    The actual rendered columns are set as a property on the row definition" -->
-                    
-              <!-- adate Column -->
-              <ng-container matColumnDef="adate">
-                <th mat-header-cell *matHeaderCellDef> Date </th>
-                <td mat-cell *matCellDef="let element"> {{element.adate}} </td>
-              </ng-container>
-            
-              <!-- reason Column -->
-              <ng-container matColumnDef="reason">
-                <th mat-header-cell *matHeaderCellDef> Reason </th>
-                <td mat-cell *matCellDef="let element"> {{element.reason}} </td>
-              </ng-container>
-            
-              <!-- notes Column -->
-              <ng-container matColumnDef="notes">
-                <th mat-header-cell *matHeaderCellDef> Notes </th>
-                <td mat-cell *matCellDef="let element"> {{element.notes}} </td>
-              </ng-container>
-            
-              <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-            </table>
+              <ul >
+                <li  *ngFor="let history of patientHistory" class="card" (click)="selectHistory(history.id)">
+                  
+                  <div class="date">
+                    <div class="day">{{history.day}}</div>
+                    <div class="month">{{history.month}}</div>
+                    <div class="year">{{history.year}}</div>
+                  </div>
+                  <div class="reason"><span>Motivo:</span>{{history.reason}} </div>
+                  <div class="notes"><span>Observación:</span>{{history.notes}}</div>
+                  <div class="doctor"><span>Doctor:</span>{{history.doctor.name}}</div>
+                
+                </li>
+              </ul>
           </div>
           <div class="col-md-7 detail">
             <div class="row">
               <div class="col-md-6"> 
-                <h6>Checkups</h6>
+                <h6>Recetas</h6>
+                <ul>
+                  <li *ngFor="let prescription of currentPrescription" class="card prescriptionCards">
+                    <div class="name"><span>Medicamento:</span>{{prescription.name}}</div>
+                    <div class="whatIsFor"><span>Para:</span>{{prescription.whatIsFor}}</div>
+                    <div class="duration"><span>Duración:</span>{{prescription.duration}}</div>
+                    <div class="timing"><span>Dosis:</span>{{prescription.timing}}</div>
+                  </li>
+                </ul>
               </div>
               <div class="col-md-6"> 
-                  <h6>Prescription</h6>
+                <h6>Examenes</h6>
               </div>
+              
             </div>
           </div>
         </div>        

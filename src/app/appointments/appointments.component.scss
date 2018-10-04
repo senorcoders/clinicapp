@@ -4,6 +4,9 @@
 button {
     width: 100%;
 }
+.onlyWhenSelected {
+    display: none;
+}
 mat-card.patient-search.mat-card {
     padding: 10px 1em;
 
@@ -71,9 +74,76 @@ mat-card.patient-info.mat-card {
     }
 }
 
-.patient-history {
-    .mat-table {
-        background: #fff;
-        width: 100%;
+.history {
+    ul {
+        margin: 0px;
+        padding: 0px;
+        li {
+            display: grid;
+            grid-template-areas: "date reason"
+                                 "date notes"
+                                 "date doctor";
+            grid-template-columns:  minmax( 80px, min-content ) auto ;
+            cursor: pointer;
+
+            &:hover {
+                .date {
+                    background-color: #fd7e14;
+
+                }
+            }
+
+            .date {
+                grid-area: date;
+                background-color: #00639d;
+                color: #fff;
+                margin-right: 0.5em;
+                padding: 0.5em;
+                
+                .day {
+                    font-size: 1.2em;
+                    text-align: center;    
+                    font-weight: 300;
+                }
+                .month {
+                    font-size: 0.9em;
+                    text-align: center;
+                    text-transform: capitalize;
+                    font-weight: 300;
+                }
+                .year {
+                    font-size: 0.9em;
+                    text-align: center;
+                    font-weight: 300;
+                }
+            }
+            .reason {
+                grid-area: reason;
+                margin-top: 0.5em;
+            }
+            .notes {
+                grid-area: notes;
+            }
+            .doctor {
+                grid-area: doctor;
+            }
+        }
+    }
+    
+}
+
+.detail {
+    margin: 0px;
+    padding: 0px;
+    .prescriptionCards {
+        display: grid;
+        grid-template-columns: "100%";
+    
+        div {
+            margin-top: 5px;                        
+        }
+        span {
+            margin-right: 5px;
+        }
     }
 }
