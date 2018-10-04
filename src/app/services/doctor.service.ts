@@ -5,12 +5,7 @@ import { environment } from '../../environments/environment';
 
 import { AuthService } from '../services/auth.service';
 
-export interface profileInfo {
-  info: any;
-  contact: any;
-  services: any;
-  schooling: any;
-}
+import { Patient, profileInfo } from '../interfaces/clinic.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -40,6 +35,10 @@ export class DoctorService {
 
   getMyPatients(doctor_id: string) {
     return this.http.get<any[]>(`${environment.base_api}/doctor/${doctor_id}/patients`);
+  }
+
+  getMyAsyncPatients(doctor_id: string) {
+    return this.http.get<Patient[]>(`${environment.base_api}/doctor/${doctor_id}/patients`);
   }
 
 }
