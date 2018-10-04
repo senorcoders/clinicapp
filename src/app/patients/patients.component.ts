@@ -14,6 +14,7 @@ import { AddPatientComponent } from './add-patient/add-patient.component';
 import { UploadAvatarComponent } from '../upload-avatar/upload-avatar.component';
 import * as moment from 'moment';
 
+
 @Component({
   selector: 'tsel-patients',
   templateUrl: './patients.component.html',
@@ -54,7 +55,7 @@ export class PatientsComponent implements OnInit {
       var formatYear = result.map( function( patient ) {
         if( moment(patient.birthday).isValid() ){
           var years_old = moment().diff( patient.birthday , 'years');
-          patient.birthday = `${years_old} years old`;
+          patient.birthday = `${years_old} años`;
         }
       } )
       this.patientsList =  result ;      
@@ -149,7 +150,7 @@ export class PatientsComponent implements OnInit {
               patient.name = newinfo.name;
               patient.email = newinfo.email;
               var years_old = moment().diff( newinfo.birthday , 'years');
-              patient.birthday = `${years_old} years old`;
+              patient.birthday = `${years_old} años`;
             }
           } )
 
