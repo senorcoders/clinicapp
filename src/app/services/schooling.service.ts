@@ -4,13 +4,7 @@ import { environment } from '../../environments/environment';
 
 import { AuthService } from '../services/auth.service';
 
-export interface Schooling {
-  id: string;
-  name: string;
-  school: string;
-  year: number;
-  imageURL: string;
-}
+import { Schooling } from '../interfaces/clinic.interface';
 
 @Injectable({
   providedIn: 'root'
