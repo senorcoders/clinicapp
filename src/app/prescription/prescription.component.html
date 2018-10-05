@@ -2,7 +2,7 @@
 <mat-dialog-content>  
   <form [formGroup]="prescriptionForm" class="prescription-form">
     <mat-form-field class="example-full-width name">
-        <input formControlName="name" matInput class="" placeholder="Medicamento">
+        <input formControlName="name" matInput class="" placeholder="Tratamiento o Medicamento">
     </mat-form-field>
     <mat-form-field class="example-full-width whatisfor">
         <input formControlName="whatIsFor" matInput class="" placeholder="Para que sirve el Medicamento">
@@ -18,5 +18,5 @@
 <mat-dialog-actions>
  <button mat-flat-button mat-dialog-close>Cancelar</button>
  <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.-->
- <button mat-flat-button (click)="savePrescription()" >Guardar Receta</button>
+ <button mat-flat-button (click)="savePrescription()" >Guardar</button>
 </mat-dialog-actions>
