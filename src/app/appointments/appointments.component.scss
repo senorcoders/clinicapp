@@ -55,7 +55,7 @@ mat-card.patient-info.mat-card {
                          "reason   reason"
                          "notes    notes"
                          "btn_save btn_save";
-    
+    grid-template-columns: 50% 50%;
     
     .title {
         grid-area: title;
@@ -78,6 +78,7 @@ mat-card.patient-info.mat-card {
 }
 
 .history {
+    padding: 0px;
     ul {
         margin: 0px;
         padding: 0px;
@@ -86,7 +87,7 @@ mat-card.patient-info.mat-card {
             grid-template-areas: "date reason"
                                  "date notes"
                                  "date doctor";
-            grid-template-columns:  minmax( 80px, min-content ) auto ;
+            grid-template-columns:  minmax( 70px, min-content ) auto ;
             cursor: pointer;
             margin-bottom: 10px;
             border: solid 0px #fff;
@@ -137,12 +138,20 @@ mat-card.patient-info.mat-card {
             .reason {
                 grid-area: reason;
                 margin-top: 0.5em;
+                font-size: 0.9em;
+                line-height: 1em;
             }
             .notes {
                 grid-area: notes;
+                margin-top: 0.5em;
+                font-size: 0.9em;
+                line-height: 1em;
             }
             .doctor {
                 grid-area: doctor;
+                margin-top: 0.5em;
+                font-size: 0.8em;
+                line-height: 1em;
             }
         }
     }
@@ -174,10 +183,10 @@ mat-card.patient-info.mat-card {
             padding: 0.5em;
             div {
                 margin-top: 5px;                        
-                font-size:  0.95em;
+                font-size:  0.85em;
 
                 span {
-                    font-size: 0.85em;
+                    font-size: 0.9em;
                 }                
             }
             span {
@@ -199,11 +208,24 @@ mat-card.patient-info.mat-card {
             grid-template-areas:    "reason reason"
                                     "notes notes"
                                     "edit image";
+            grid-template-columns: 50% 50%;
 
             &:hover {
                 background-color: #fd7e14;
-                color: #fff;
-                cursor: pointer;
+                color: #fff;                
+            }
+
+            .reason {
+                grid-area: reason;
+            }
+            .notes {
+                grid-area: notes;
+            }
+            .edit {
+                grid-area: edit;
+            }
+            .image {
+                grid-area: image;
             }
 
             margin-top: 5px;
@@ -229,11 +251,13 @@ mat-card.patient-info.mat-card {
                 justify-self: end;
                 text-transform: uppercase;
                 font-size: 0.75em;
+                cursor: pointer;
             }
             .edit {
                 color: #00639d;           
                 text-transform: uppercase;
                 font-size: 0.75em;  
+                cursor: pointer;
             }
         }
     }
