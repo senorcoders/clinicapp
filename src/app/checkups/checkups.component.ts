@@ -19,7 +19,7 @@ export class CheckupsComponent implements OnInit {
   doctorID:       string;
   appointmentID:  string;
   reason:         string;
-  notes:          string;
+  note:          string;
   imageURL:       string;
   addCheckupForm: FormGroup;
   selectedFile:   File;
@@ -27,6 +27,8 @@ export class CheckupsComponent implements OnInit {
   constructor( @Inject( MAT_DIALOG_DATA ) public data: any, private  dialogRef: MatDialogRef<CheckupsComponent>, private http: HttpClient, private authservice: AuthService, private formBuilder: FormBuilder, private checkupService: CheckupsService ) { 
     this.modalTitle     = data.title;
     this.id             = data.id;
+    this.reason         = data.reason;
+    this.note          = data.note;
     this.appointmentID  = data.appointmentID;
     this.doctorID       = authservice.doctorID;
     console.log(data);
@@ -36,7 +38,7 @@ export class CheckupsComponent implements OnInit {
   ngOnInit() {
     this.addCheckupForm = this.formBuilder.group( {
       reason: [ this.reason, Validators.required ],
-      notes:  [ this.notes, Validators.required ],
+      note:  [ this.note, Validators.required ],
       appointment: [ this.appointmentID, Validators.required ]
     } )
   }
@@ -66,26 +68,34 @@ export class CheckupsComponent implements OnInit {
     if( this.id == null || this.id == '' ) {
       this.checkupService.save( this.addCheckupForm.value )
       .subscribe( data => {
+       
+        console.log('lol');
         console.log( data );
-        if( this.selectedFile !== null ) {
+        console.log( this.selectedFile );
+        if( this.selectedFile !== null && this.selectedFile !== undefined ) {
           if( data.hasOwnProperty('id') ){
             this.onUpload( data.id )
           }else{
             this.dialogRef.close();
           }
-        }        
+        } else {
+          this.dialogRef.close();
+        }
       } )
     }else {
       this.checkupService.update( this.id, this.addCheckupForm.value )
       .subscribe( data => {
         console.log( data );
-        if( this.selectedFile !== null ) {
+        console.log( this.selectedFile );
+        if( this.selectedFile !== null && this.selectedFile !== undefined ) {
           if( data.hasOwnProperty('id') ){
             this.onUpload( data.id )
           }else{
             this.dialogRef.close();
           }
-        }                
+        }else{
+          this.dialogRef.close();
+        }
       } )      
     }    
   }

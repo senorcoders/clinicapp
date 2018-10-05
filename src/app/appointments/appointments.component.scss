@@ -156,22 +156,84 @@ mat-card.patient-info.mat-card {
         padding: 0px;
         margin: 0px;
 
-        li {
+        li.prescriptionCards {
             display: grid;
             grid-template-columns: "100%";
 
+            &:hover {
+                background-color: #fd7e14;
+                color: #fff;
+                cursor: pointer;
+            }
+
             margin-top: 5px;
-            border: solid 0px #fff;
             margin-bottom: 10px;
             border: solid 0px #fff;
             background-color: #e6e6e6;
             box-shadow: 2px 1px 1px #adadad;
-
+            padding: 0.5em;
             div {
                 margin-top: 5px;                        
+                font-size:  0.95em;
+
+                span {
+                    font-size: 0.85em;
+                }                
             }
             span {
                 margin-right: 5px;
+            }
+            .image {
+                display: inline-block;
+                width: 50%;
+                text-align: right;
+            }
+            .edit {
+                display: inline;
+                width: 50%;                
+            }
+        }
+
+        li.checkupsCards {
+            display: grid;
+            grid-template-areas:    "reason reason"
+                                    "notes notes"
+                                    "edit image";
+
+            &:hover {
+                background-color: #fd7e14;
+                color: #fff;
+                cursor: pointer;
+            }
+
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: solid 0px #fff;
+            background-color: #e6e6e6;
+            box-shadow: 2px 1px 1px #adadad;
+            padding: 0.5em;
+            div {
+                margin-top: 5px;                        
+                font-size:  0.95em;
+
+                span {
+                    font-size: 0.85em;
+                }                
+            }
+            span {
+                margin-right: 5px;
+            }
+            .image {
+                color: #00639d;
+                align-self: center;
+                justify-self: end;
+                text-transform: uppercase;
+                font-size: 0.75em;
+            }
+            .edit {
+                color: #00639d;           
+                text-transform: uppercase;
+                font-size: 0.75em;  
             }
         }
     }

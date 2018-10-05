@@ -318,14 +318,16 @@ export class AppointmentsComponent implements OnInit {
     )
   }
 
-  openCheckupsModal() {
+  openCheckupsModal( id:string, reason:string, note:string ) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-      id: '',
+      id: id,
+      reason: reason,
+      note: note,
       appointmentID: this.currentAppointment,
-      title: 'Examenes'
+      title: 'Examenes'      
     };
     const dialogRef = this.dialog.open(CheckupsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {

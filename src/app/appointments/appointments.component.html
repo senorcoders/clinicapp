@@ -120,14 +120,15 @@
           <h6>Examenes</h6>
           
           <ul>
-            <li *ngFor="let checkup of currentCheckups;" class="card checkupsCards" (click)="openInFullScreen(checkup.galleryIndex)">
+            <li *ngFor="let checkup of currentCheckups;" class="card checkupsCards">
               <div class="reason"><span>Motivo:</span>{{checkup.reason}}</div>
-              <div class="notes"><span>Observacion:</span>{{checkup.note}}</div>
-              <div class="image" [class.hiddeSection]="checkup.imageURL == ''"><a (click)="openInFullScreen(checkup.galleryIndex)" >Ver Adjunto</a></div>                    
+              <div class="notes"><span>Observacion:</span>{{checkup.note}}</div>              
+              <div class="edit" ><a (click)="openCheckupsModal(checkup.id, checkup.reason, checkup.note)" >Editar</a></div>
+              <div class="image" [class.hiddeSection]="checkup.imageURL == ''"><a (click)="openInFullScreen(checkup.galleryIndex)" >Ver Adjunto</a></div>
             </li>
           </ul>
           <br>
-          <button (click)="openCheckupsModal()" class="btn_save" color="primary" mat-flat-button>Añadir Examen</button>
+          <button (click)="openCheckupsModal('','','')" class="btn_save" color="primary" mat-flat-button>Añadir Examen</button>
         </mat-card>
         </div>                      
       </div>
