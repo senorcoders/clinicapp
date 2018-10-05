@@ -1,20 +1,20 @@
 <h2 mat-dialog-title>{{modalTitle}}</h2>
-<form class="checkup-form">
+<form [formGroup]="addCheckupForm" (ngSubmit)="saveCheckup()" class="checkup-form">
   <mat-dialog-content>    
     <mat-form-field class="example-full-width reason">
-        <textarea matInput class="" placeholder="Reason"></textarea>
+        <textarea formControlName="reason" matInput class="" placeholder="Motivo"></textarea>
     </mat-form-field><br>
     <mat-form-field class="example-full-width notes">
-        <textarea matInput class="" placeholder="Notes"></textarea>
+        <textarea formControlName="notes" matInput class="" placeholder="Observación"></textarea>
       </mat-form-field><br>
     <div class="example-full-width image">
-        <input  type="file" class="" placeholder="reason">
+        <input (change)="onFileSelected($event)"  type="file" class="" placeholder="Imagen">
     </div>          
-                
+    <input formControlName="appointment" type="hidden" />
   </mat-dialog-content>
   <mat-dialog-actions>
-    <button mat-flat-button mat-dialog-close>Cancel</button>
+    <button mat-flat-button mat-dialog-close>Cancelar</button>
     <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.-->
-    <button mat-flat-button [mat-dialog-close]="true">Save Checkup</button>
+    <button mat-flat-button >Guardar</button>
   </mat-dialog-actions>
 </form>

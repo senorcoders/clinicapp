@@ -49,9 +49,17 @@ export interface Prescription {
 }
 
 export interface Schooling {
-    id: string;
-    name: string;
-    school: string;
-    year: number;
+    id:       string;
+    name:     string;
+    school:   string;
+    year:     number;
     imageURL: string;
+}
+
+export interface Checkup {
+    id:           string;
+    reason:       string;
+    notes:        string;
+    imageURL:     string;
+    galleryIndex: number;
 }
