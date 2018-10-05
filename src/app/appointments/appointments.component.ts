@@ -338,40 +338,55 @@ export class AppointmentsComponent implements OnInit {
     });
   }
 
-getCheckups() {
-  const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
-  galleryRef.reset();
-  this.checkupService.get( this.currentAppointment )
-  .subscribe(
-    res => {
-      this.currentCheckups = res;
-      let galleryIndex = -1;
-      res.map( checkup => {
-        //this.items.push( new ImageItem({ src: checkup.imageURL, thumb: checkup.imageURL }) ) ;
-        if(checkup.imageURL !== ''){
-          galleryIndex += 1;
-          checkup.galleryIndex = galleryIndex;
-          galleryRef.addImage({
-            src: checkup.imageURL,
-            thumb: checkup.imageURL,
-            title: checkup.notes
-          });
-          console.log(checkup.imageURL);
+  getCheckups() {
+    const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+    galleryRef.reset();
+    this.checkupService.get( this.currentAppointment )
+    .subscribe(
+      res => {
+        this.currentCheckups = res;
+        let galleryIndex = -1;
+        res.map( checkup => {
+          //this.items.push( new ImageItem({ src: checkup.imageURL, thumb: checkup.imageURL }) ) ;
+          if(checkup.imageURL !== ''){
+            galleryIndex += 1;
+            checkup.galleryIndex = galleryIndex;
+            galleryRef.addImage({
+              src: checkup.imageURL,
+              thumb: checkup.imageURL,
+              title: checkup.notes
+            });
+            console.log(checkup.imageURL);
 
-        }
-      } )
-    },
-    error => {
-      console.log( error );
-    }
-  )
-}
+          }
+        } )
+      },
+      error => {
+        console.log( error );
+      }
+    )
+  }
 
-openInFullScreen(index: number) {
-  console.log(index);
-  this.lightbox.open(index, this.galleryId, {
-    panelClass: 'fullscreen'
-  });
-}
+  deleteCheckup( id:string ){
+    this.checkupService.delete( id )
+    .subscribe(
+      res => {
+        console.log(res.reason);
+        this.getCheckups();
+        this.snackBar.showMessage( 'Examen borrado!!' );
+      },
+      error => {
+        console.log(error);
+        this.snackBar.showMessage( 'Ocurrio un error al intentar borrar el examen!!' );
+      }
+    )
+  }
+
+  openInFullScreen(index: number) {
+    console.log(index);
+    this.lightbox.open(index, this.galleryId, {
+        panelClass: 'fullscreen'
+    });
+  }
 
 }

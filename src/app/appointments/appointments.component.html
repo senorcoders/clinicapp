@@ -125,6 +125,7 @@
               <div class="notes"><span>Observacion:</span>{{checkup.note}}</div>              
               <div class="edit" ><a (click)="openCheckupsModal(checkup.id, checkup.reason, checkup.note)" >Editar</a></div>
               <div class="image" [class.hiddeSection]="checkup.imageURL == ''"><a (click)="openInFullScreen(checkup.galleryIndex)" >Ver Adjunto</a></div>
+              <div class="delete" ><a (click)="deleteCheckup(checkup.id)" >Borrar</a></div>
             </li>
           </ul>
           <br>

@@ -205,10 +205,10 @@ mat-card.patient-info.mat-card {
 
         li.checkupsCards {
             display: grid;
-            grid-template-areas:    "reason reason"
-                                    "notes notes"
-                                    "edit image";
-            grid-template-columns: 50% 50%;
+            grid-template-areas:    "reason reason reason"
+                                    "notes notes notes"
+                                    "edit image delete";
+            grid-template-columns: 33.3% 33.3% 33.3%;
 
             &:hover {
                 background-color: #fd7e14;
@@ -223,9 +223,30 @@ mat-card.patient-info.mat-card {
             }
             .edit {
                 grid-area: edit;
+                color: #00639d;           
+                text-transform: uppercase;
+                font-size: 0.75em;  
+                cursor: pointer;
+                align-self: center;
+                justify-self: left;
             }
             .image {
                 grid-area: image;
+                color: #00639d;
+                align-self: center;
+                justify-self: center;
+                text-transform: uppercase;
+                font-size: 0.75em;
+                cursor: pointer;
+            }
+            .delete {
+                grid-area: delete;
+                color: #00639d;           
+                text-transform: uppercase;
+                font-size: 0.75em;  
+                cursor: pointer;
+                align-self: center;
+                justify-self: end;
             }
 
             margin-top: 5px;
@@ -244,20 +265,6 @@ mat-card.patient-info.mat-card {
             }
             span {
                 margin-right: 5px;
-            }
-            .image {
-                color: #00639d;
-                align-self: center;
-                justify-self: end;
-                text-transform: uppercase;
-                font-size: 0.75em;
-                cursor: pointer;
-            }
-            .edit {
-                color: #00639d;           
-                text-transform: uppercase;
-                font-size: 0.75em;  
-                cursor: pointer;
             }
         }
     }
