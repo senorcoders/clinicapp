@@ -22,21 +22,31 @@ export class PrescriptionComponent implements OnInit {
   doctorID: string;
   prescriptionID: string;
   prescriptionForm: FormGroup;
+  name: string;
+  whatIsFor: string;
+  duration: string;
+  timing: string;
+  id: string;
 
   constructor( @Inject( MAT_DIALOG_DATA ) public data: any, private  dialogRef: MatDialogRef<PrescriptionComponent>, private formBuilder: FormBuilder, private authService: AuthService, private prescriptionService: PrescriptionService ) { 
-    this.doctorID = authService.doctorID;
-    this.modalTitle = data.title;
-    this.appointmentID = data.appointmentID;
-    this.prescriptionID = data.id
-    console.log(data);
+    this.doctorID       = authService.doctorID;
+    this.modalTitle     = data.title;
+    this.appointmentID  = data.appointmentID;
+    this.prescriptionID = data.id;
+    this.id             = data.id;
+    this.name           = data.name;
+    this.whatIsFor      = data.whatIsFor;
+    this.duration       = data.duration;
+    this.timing         = data.timing;
+    console.log( data );
    }
 
   ngOnInit() {
     this.prescriptionForm = this.formBuilder.group({
-      name:        [ '', Validators.required ],
-      whatIsFor:   [ '', Validators.required ],
-      duration:    [ '', Validators.required ],
-      timing:      [ '', Validators.required ],
+      name:        [ this.name, Validators.required ],
+      whatIsFor:   [ this.whatIsFor, Validators.required ],
+      duration:    [ this.duration, Validators.required ],
+      timing:      [ this.timing, Validators.required ],
       appointment: [ this.appointmentID, Validators.required ],
     })
   }
@@ -44,11 +54,11 @@ export class PrescriptionComponent implements OnInit {
 
   savePrescription() {
     let prescriptionJSON = {
-      name: this.prescriptionForm.controls['name'].value,
-      whatIsFor: this.prescriptionForm.controls['whatIsFor'].value,
-      duration: this.prescriptionForm.controls['duration'].value,
-      timing: this.prescriptionForm.controls['timing'].value,
-      appointment: this.appointmentID
+      name:         this.prescriptionForm.controls['name'].value,
+      whatIsFor:    this.prescriptionForm.controls['whatIsFor'].value,
+      duration:     this.prescriptionForm.controls['duration'].value,
+      timing:       this.prescriptionForm.controls['timing'].value,
+      appointment:  this.appointmentID
     }
     console.log( prescriptionJSON );
     if( this.prescriptionID !== ""){

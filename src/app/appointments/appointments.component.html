@@ -109,10 +109,12 @@
                   <div class="whatIsFor"><span>Para:</span>{{prescription.whatIsFor}}</div>
                   <div class="duration"><span>Duración:</span>{{prescription.duration}}</div>
                   <div class="timing"><span>Dosis:</span>{{prescription.timing}}</div>
+                  <div class="edit" ><a (click)="openPrescriptionModal(prescription.id, prescription.name, prescription.whatIsFor, prescription.duration, prescription.timing)" >Editar</a></div>                  
+                  <div class="delete" ><a (click)="deletePrescription(prescription.id)" >Borrar</a></div>
                 </li>
               </ul>
               <br>
-              <button  (click)="openPrescriptionModal()"  class="btn_save" color="primary" mat-flat-button>Añadir Tratamiento</button>
+              <button  (click)="openPrescriptionModal('','','','','')"  class="btn_save" color="primary" mat-flat-button>Añadir Tratamiento</button>
               </mat-card>
         </div>
         <div class="col-md-12"> 

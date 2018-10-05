@@ -288,12 +288,16 @@ export class AppointmentsComponent implements OnInit {
      
   }
 
-  openPrescriptionModal() {
+  openPrescriptionModal( id:string, name:string, whatIsFor:string, duration:string, timing:string ) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-      id: '',
+      id: id,
+      name: name,
+      whatIsFor: whatIsFor,
+      duration: duration,
+      timing: timing,
       appointmentID: this.currentAppointment,
       title: 'Receta'
     };
@@ -314,6 +318,21 @@ export class AppointmentsComponent implements OnInit {
       },
       error => {
         console.log( error );
+      }
+    )
+  }
+
+  deletePrescription( id:string ) {
+    this.prescriptionService.delete( id )
+    .subscribe(
+      res => {
+        console.log( res );
+        this.snackBar.showMessage( 'Receta Borrada' );
+        this.getPrescription();
+      },
+      error => {
+        console.log( error );
+        this.snackBar.showMessage( "Ocurrio un error al guardar la Receta" );
       }
     )
   }

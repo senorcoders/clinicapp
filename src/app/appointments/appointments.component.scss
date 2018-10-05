@@ -166,8 +166,19 @@ mat-card.patient-info.mat-card {
         margin: 0px;
 
         li.prescriptionCards {
+            margin-top: 5px;
+            margin-bottom: 10px;
+            border: solid 0px #fff;
+            background-color: #e6e6e6;
+            box-shadow: 2px 1px 1px #adadad;
+            padding: 0.5em;
             display: grid;
-            grid-template-columns: "100%";
+            grid-template-areas:    "name name"
+                                    "whatIsFor whatIsFor"
+                                    "duration duration"
+                                    "timing timing"
+                                    "edit delete";
+            grid-template-columns: "50% 50%";            
 
             &:hover {
                 background-color: #fd7e14;
@@ -175,12 +186,46 @@ mat-card.patient-info.mat-card {
                 cursor: pointer;
             }
 
-            margin-top: 5px;
-            margin-bottom: 10px;
-            border: solid 0px #fff;
-            background-color: #e6e6e6;
-            box-shadow: 2px 1px 1px #adadad;
-            padding: 0.5em;
+            .name {
+                grid-area: name;
+            }
+            .whatIsFor {
+                grid-area: whatIsFor;
+            }
+            .duration {
+                grid-area: duration;
+            }
+            .timing {
+                grid-area: timing;
+            }
+            .edit {
+                grid-area: edit;
+                color: #00639d;           
+                text-transform: uppercase;
+                font-size: 0.75em;  
+                cursor: pointer;
+                align-self: center;
+                justify-self: left;
+            }
+            .image {
+                grid-area: image;
+                color: #00639d;
+                align-self: center;
+                justify-self: center;
+                text-transform: uppercase;
+                font-size: 0.75em;
+                cursor: pointer;
+            }
+            .delete {
+                grid-area: delete;
+                color: #00639d;           
+                text-transform: uppercase;
+                font-size: 0.75em;  
+                cursor: pointer;
+                align-self: center;
+                justify-self: end;
+            }
+            
             div {
                 margin-top: 5px;                        
                 font-size:  0.85em;
