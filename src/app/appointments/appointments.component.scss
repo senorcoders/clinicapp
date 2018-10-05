@@ -7,6 +7,9 @@ button {
 .onlyWhenSelected {
     display: none;
 }
+.hiddeSection{
+    display: none;
+}
 mat-card.patient-search.mat-card {
     padding: 10px 1em;
 
@@ -85,11 +88,21 @@ mat-card.patient-info.mat-card {
                                  "date doctor";
             grid-template-columns:  minmax( 80px, min-content ) auto ;
             cursor: pointer;
+            margin-bottom: 10px;
+            border: solid 0px #fff;
+            background-color: #e6e6e6;
+            box-shadow: 2px 1px 1px #adadad;
 
             &:hover {
                 .date {
                     background-color: #fd7e14;
 
+                }
+            }
+
+            &.isActive {
+                .date {
+                    background-color: #fd7e14;
                 }
             }
 
@@ -99,11 +112,15 @@ mat-card.patient-info.mat-card {
                 color: #fff;
                 margin-right: 0.5em;
                 padding: 0.5em;
+                display: grid;
+                grid-template-rows: 1fr 1fr 1fr;
                 
                 .day {
                     font-size: 1.2em;
                     text-align: center;    
+                    justify-self: center;
                     font-weight: 300;
+                    
                 }
                 .month {
                     font-size: 0.9em;
@@ -135,15 +152,27 @@ mat-card.patient-info.mat-card {
 .detail {
     margin: 0px;
     padding: 0px;
-    .prescriptionCards {
-        display: grid;
-        grid-template-columns: "100%";
-    
-        div {
-            margin-top: 5px;                        
-        }
-        span {
-            margin-right: 5px;
+    ul {
+        padding: 0px;
+        margin: 0px;
+
+        li {
+            display: grid;
+            grid-template-columns: "100%";
+
+            margin-top: 5px;
+            border: solid 0px #fff;
+            margin-bottom: 10px;
+            border: solid 0px #fff;
+            background-color: #e6e6e6;
+            box-shadow: 2px 1px 1px #adadad;
+
+            div {
+                margin-top: 5px;                        
+            }
+            span {
+                margin-right: 5px;
+            }
         }
     }
 }

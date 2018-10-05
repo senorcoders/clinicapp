@@ -3,6 +3,9 @@ import {FormControl, FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {Observable} from 'rxjs';
 import {map, startWith} from 'rxjs/operators';
 import { MatDialog, MatDialogConfig } from '@angular/material';
+import { Gallery, GalleryRef , GalleryItem, ImageItem } from '@ngx-gallery/core';
+import { Lightbox } from '@ngx-gallery/lightbox';
+
 
 import { PrescriptionComponent } from '../prescription/prescription.component';
 import { CheckupsComponent } from '../checkups/checkups.component';
@@ -12,6 +15,8 @@ import { DoctorService } from '../services/doctor.service';
 import { PatientsService } from '../services/patients.service';
 import { AppointmentService } from '../services/appointment.service';
 import { PrescriptionService } from '../services/prescription.service';
+import { CheckupsService } from '../services/checkups.service';
+import { SnackBarService } from '../services/snack-bar.service';
 
 import * as moment from 'moment';
 
@@ -51,7 +56,10 @@ export class AppointmentsComponent implements OnInit {
   patientHistory:      any[];
   appointmentForm:     FormGroup;
   currentPrescription: any[];
-
+  currentCheckups:     any[];
+  i:                   number = 0;
+  galleryId = 'Examenes';
+  items: GalleryItem[];
 
   dataSource = ELEMENT_DATA;
 
@@ -85,7 +93,7 @@ export class AppointmentsComponent implements OnInit {
     }
   ];  
 
-  constructor(  public dialog: MatDialog, private doctorService: DoctorService, private patientService: PatientsService, private authService: AuthService, private formBuilder: FormBuilder, private appointmentService: AppointmentService, private prescriptionService: PrescriptionService ) { 
+  constructor( private snackBar: SnackBarService, public dialog: MatDialog, private doctorService: DoctorService, private patientService: PatientsService, private authService: AuthService, private formBuilder: FormBuilder, private appointmentService: AppointmentService, private prescriptionService: PrescriptionService, private checkupService: CheckupsService, public gallery: Gallery, private lightbox: Lightbox ) { 
     this.doctorID = authService.doctorID; 
     this.selectedPatient = {
       id: '',
@@ -115,6 +123,9 @@ export class AppointmentsComponent implements OnInit {
       this.selectedPatient.id = patient.id;
       this.getPatientInfo( patient.id  );
       this.getHistory( );
+      this.items=[];
+      const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+
     } );
 
     this.appointmentForm = this.formBuilder.group( {      
@@ -126,6 +137,9 @@ export class AppointmentsComponent implements OnInit {
         doctor: [this.doctorID, Validators.required ],
         patient: [this.selectedPatient.id, Validators.required ] 
       } )
+
+      const galleryRef = this.gallery.ref(this.galleryId);
+      galleryRef.load(this.items);
   }
   
   
@@ -208,6 +222,7 @@ export class AppointmentsComponent implements OnInit {
           if( res.hasOwnProperty("id") ){
             this.currentAppointment = res.id;
             this.getHistory();
+            this.snackBar.showMessage("Consulta Actualizada");
           }       
         },
         error => {                    
@@ -220,6 +235,8 @@ export class AppointmentsComponent implements OnInit {
         res => {             
           if( res.hasOwnProperty("id") ){
             this.currentAppointment = res.id;
+            this.getHistory();
+            this.snackBar.showMessage("Consulta Creada!!");
           }       
         },
         error => {                    
@@ -253,8 +270,16 @@ export class AppointmentsComponent implements OnInit {
         this.appointmentForm.controls['height'].setValue( res.height );
         this.appointmentForm.controls['notes'].setValue( res.notes );
         this.appointmentForm.controls['reason'].setValue( res.reason );
-        
+
         this.getPrescription();
+        this.getCheckups();
+
+        /*this.snackBar.open("Hello There ", '' ,{
+          duration: 3000,
+          verticalPosition : 'top',
+          horizontalPosition : 'right'
+        });*/
+        this.snackBar.showMessage("Consulta abierta");        
       },
       error => {
         console.log( error );
@@ -274,8 +299,10 @@ export class AppointmentsComponent implements OnInit {
     };
     const dialogRef = this.dialog.open(PrescriptionComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
+      this.snackBar.showMessage( "Receta Guardada!!" );
       console.log(" Dialog was closed ")
       console.log(result)
+      this.getPrescription();
     });
   }
 
@@ -296,16 +323,53 @@ export class AppointmentsComponent implements OnInit {
     dialogConfig.disableClose = true;
     dialogConfig.autoFocus = true;
     dialogConfig.data = {
-      id: '5ba0357ce01ba104ac9ea7a6',
-      title: 'Checkups'
+      id: '',
+      appointmentID: this.currentAppointment,
+      title: 'Examenes'
     };
     const dialogRef = this.dialog.open(CheckupsComponent, dialogConfig);
     dialogRef.afterClosed().subscribe(result => {
       console.log(" Dialog was closed ")
       console.log(result)
+      this.snackBar.showMessage("Examen Guardado!!");
+      this.getCheckups();
     });
   }
 
-  
+getCheckups() {
+  const galleryRef: GalleryRef = this.gallery.ref(this.galleryId);
+  galleryRef.reset();
+  this.checkupService.get( this.currentAppointment )
+  .subscribe(
+    res => {
+      this.currentCheckups = res;
+      let galleryIndex = -1;
+      res.map( checkup => {
+        //this.items.push( new ImageItem({ src: checkup.imageURL, thumb: checkup.imageURL }) ) ;
+        if(checkup.imageURL !== ''){
+          galleryIndex += 1;
+          checkup.galleryIndex = galleryIndex;
+          galleryRef.addImage({
+            src: checkup.imageURL,
+            thumb: checkup.imageURL,
+            title: checkup.notes
+          });
+          console.log(checkup.imageURL);
+
+        }
+      } )
+    },
+    error => {
+      console.log( error );
+    }
+  )
+}
+
+openInFullScreen(index: number) {
+  console.log(index);
+  this.lightbox.open(index, this.galleryId, {
+    panelClass: 'fullscreen'
+  });
+}
 
 }
