@@ -16,7 +16,7 @@ export class AppComponent {
   constructor( private authService: AuthService, private router: Router) {    
     if( authService.isAuthenticated ){
       this.loggedIn = true;
-      this.router.navigate(['/profile']);
+      //this.router.navigate(['/profile']);
     } else {
       this.loggedIn = false;
       this.router.navigate(['/']);

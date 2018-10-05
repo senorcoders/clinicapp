@@ -1,13 +1,15 @@
-  import { BrowserModule } from '@angular/platform-browser';
-  import { NgModule } from '@angular/core';
-  import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-  import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
-  import { RouterModule, Route } from '@angular/router';
-  
+import { BrowserModule } from '@angular/platform-browser';
+import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
+import { RouterModule, Route } from '@angular/router';
 
 import { AppComponent } from './app.component';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
+import { GalleryModule } from  '@ngx-gallery/core';
+import { LightboxModule } from  '@ngx-gallery/lightbox';
 
 import { MyMaterialModule } from './material';
 import { SidebarComponent } from './sidebar/sidebar.component';
@@ -30,7 +32,12 @@ import { LoginComponent } from './login/login.component';
 
 import { AuthService } from './services/auth.service';
 import { InterceptService } from './services/intercept.service';
+import { SnackBarService } from './services/snack-bar.service';
+import { CheckupsService } from './services/checkups.service';
+import { PrescriptionService } from './services/prescription.service';
+import { AppointmentService } from './services/appointment.service';
 import { CanActivateViaAuthGuardService } from './services/can-activate-via-auth-guard.service';
+
 import { AuthGuard } from './auth.guard';
 import { DoctorServicesComponent } from './profile/doctor-services/doctor-services.component';
 import { BasicInfoComponent } from './profile/basic-info/basic-info.component';
@@ -40,7 +47,7 @@ import { SchoolingComponent } from './schooling/schooling.component';
 const routes: Route[] =[
   {
     path: '',
-    component: LoginComponent
+    component: ProfileComponent
   },
   {
     path: 'profile',
@@ -91,10 +98,12 @@ const routes: Route[] =[
     HttpClientModule,
     RouterModule.forRoot( routes ),
     BrowserAnimationsModule,
+    GalleryModule.forRoot({thumbPosition: "left"}),
+    LightboxModule.forRoot(),
     MyMaterialModule
   ],
   entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, ContactComponent, BasicInfoComponent, DoctorServicesComponent, AddPatientComponent, SchoolingComponent],
-  providers: [CategoriesService, PostsListService, DoctorService, AuthService,
+  providers: [CategoriesService, PostsListService, DoctorService,  SnackBarService, CheckupsService, PrescriptionService, AppointmentService, AuthService, 
   {
     provide: HTTP_INTERCEPTORS,
     useClass: InterceptService,
