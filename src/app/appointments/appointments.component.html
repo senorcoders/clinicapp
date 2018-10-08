@@ -78,16 +78,17 @@
               <div class="row">
                 <div class="col-md-12 history">
                     <ul >
-                      <li  *ngFor="let history of patientHistory" class="card" (click)="selectHistory(history.id)" [class.isActive]="history.id == currentAppointment">
+                      <li  *ngFor="let history of patientHistory" class="card"  [class.isActive]="history.id == currentAppointment">
                         
-                        <div class="date">
+                        <div class="date" (click)="selectHistory(history.id)">
                           <div class="day">{{history.day}}</div>
                           <div class="month">{{history.month}}</div>
                           <div class="year">{{history.year}}</div>
                         </div>
-                        <div class="reason"><label>Motivo:</label><span>{{history.reason}}</span></div>
-                        <div class="notes"><label>Observacion:</label><span>{{history.notes}}</span></div>
-                        <div class="doctor"><label>Doctor:</label><span>{{history.doctor.name}}</span></div>                
+                        <div class="reason" (click)="selectHistory(history.id)"><label>Motivo:</label><span>{{history.reason}}</span></div>
+                        <div class="notes" (click)="selectHistory(history.id)"><label>Observacion:</label><span>{{history.notes}}</span></div>
+                        <div class="doctor" (click)="selectHistory(history.id)"><label>Doctor:</label><span>{{history.doctor.name}}</span></div>
+                        <div class="sendEmail" (click)="openEmailModal( history.id, history.day + ' de ' + history.month + ' de ' + history.year  )"><span><i class="far fa-envelope"></i>Enviar Por Correo Receta y Examenes</span></div>                
                       </li>
                     </ul>
                 </div>          

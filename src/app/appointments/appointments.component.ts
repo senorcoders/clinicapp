@@ -9,6 +9,7 @@ import { Lightbox } from '@ngx-gallery/lightbox';
 
 import { PrescriptionComponent } from '../prescription/prescription.component';
 import { CheckupsComponent } from '../checkups/checkups.component';
+import { EmailComponent } from '../email/email.component';
 
 import { AuthService } from '../services/auth.service';
 import { DoctorService } from '../services/doctor.service';
@@ -337,6 +338,25 @@ export class AppointmentsComponent implements OnInit {
     )
   }
 
+  openEmailModal( appointmentID:string, appointmentDate: string ){
+    const dialogConfig = new MatDialogConfig();
+    dialogConfig.disableClose = true;
+    dialogConfig.autoFocus = true;
+    dialogConfig.data = {
+      id: appointmentID,
+      title: 'Enviar Receta y Examenes',
+      patientEmail: this.selectedPatient.email ,
+      subject: `Consulta del ${appointmentDate}`
+    };
+    const dialogRef = this.dialog.open( EmailComponent, dialogConfig);
+    dialogRef.afterClosed().subscribe(result => {
+      console.log(" Dialog was closed ")
+      console.log(result)
+      //this.snackBar.showMessage("Examen Guardado!!");
+      //this.getCheckups();
+    });
+  }
+
   openCheckupsModal( id:string, reason:string, note:string ) {
     const dialogConfig = new MatDialogConfig();
     dialogConfig.disableClose = true;
@@ -407,5 +427,6 @@ export class AppointmentsComponent implements OnInit {
         panelClass: 'fullscreen'
     });
   }
+  
 
 }

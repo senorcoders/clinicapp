@@ -43,6 +43,7 @@ import { DoctorServicesComponent } from './profile/doctor-services/doctor-servic
 import { BasicInfoComponent } from './profile/basic-info/basic-info.component';
 import { AddPatientComponent } from './patients/add-patient/add-patient.component';
 import { SchoolingComponent } from './schooling/schooling.component';
+import { EmailComponent } from './email/email.component';
 
 const routes: Route[] =[
   {
@@ -68,6 +69,11 @@ const routes: Route[] =[
     path: 'calendar',
     component: CalendarComponent,
     canActivate: [ AuthGuard ]
+  },  
+  {
+    path: 'messages',
+    component: CalendarComponent,
+    canActivate: [ AuthGuard ]
   }
   
 ]
@@ -89,7 +95,8 @@ const routes: Route[] =[
     DoctorServicesComponent,
     BasicInfoComponent,
     AddPatientComponent,
-    SchoolingComponent
+    SchoolingComponent,
+    EmailComponent
   ],
   imports: [
     BrowserModule,
@@ -102,7 +109,7 @@ const routes: Route[] =[
     LightboxModule.forRoot(),
     MyMaterialModule
   ],
-  entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, ContactComponent, BasicInfoComponent, DoctorServicesComponent, AddPatientComponent, SchoolingComponent],
+  entryComponents: [ProfileComponent, UploadAvatarComponent, PrescriptionComponent, CheckupsComponent, EmailComponent , ContactComponent, BasicInfoComponent, DoctorServicesComponent, AddPatientComponent, SchoolingComponent ],
   providers: [CategoriesService, PostsListService, DoctorService,  SnackBarService, CheckupsService, PrescriptionService, AppointmentService, AuthService, 
   {
     provide: HTTP_INTERCEPTORS,

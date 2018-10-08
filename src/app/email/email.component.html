@@ -1,0 +1,16 @@
+<h2 mat-dialog-title>{{modalTitle}}</h2>
+<form [formGroup]="emailForm" (ngSubmit)="send()" class="checkup-form">
+  <mat-dialog-content>    
+    <mat-form-field class="example-full-width reason">
+        <input formControlName="toEmail" matInput class="" placeholder="Email" />
+    </mat-form-field><br>
+    <mat-form-field class="example-full-width notes">
+        <input formControlName="subject" matInput class="" placeholder="Subject" />
+    </mat-form-field><br>  
+  </mat-dialog-content>
+  <mat-dialog-actions>
+    <button mat-flat-button mat-dialog-close>Cancelar</button>
+    <!-- The mat-dialog-close directive optionally accepts a value as a result for the dialog.-->
+    <button mat-flat-button >Enviar</button>
+  </mat-dialog-actions>
+</form>

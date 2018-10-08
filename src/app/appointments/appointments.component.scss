@@ -87,10 +87,10 @@ mat-card.patient-info.mat-card {
         padding: 0px;
         li {
             display: grid;
-            grid-template-areas: "date reason"
-                                 "date notes"
-                                 "date doctor";
-            grid-template-columns:  minmax( 70px, min-content ) auto ;
+            grid-template-areas: "date  reason  reason"
+                                 "date  notes   notes"
+                                 "date  doctor  sendEmail" ;
+            grid-template-columns:  minmax( 70px, min-content )  auto  auto ;
             cursor: pointer;
             margin-bottom: 10px;
             border: solid 0px #fff;
@@ -108,8 +108,7 @@ mat-card.patient-info.mat-card {
                 .date {
                     background-color: #fd7e14;
                 }
-            }
-
+            }            
             .date {
                 grid-area: date;
                 background-color: #00639d;
@@ -149,12 +148,29 @@ mat-card.patient-info.mat-card {
                 margin-top: 0.5em;
                 font-size: 0.9em;
                 line-height: 1em;
+                align-self: center;
+                justify-self: left;
             }
             .doctor {
                 grid-area: doctor;
                 margin-top: 0.5em;
                 font-size: 0.8em;
                 line-height: 1em;
+            }
+            .sendEmail {
+                grid-area: sendEmail;
+                justify-self: right;
+                align-self: center;
+                cursor: pointer;
+                span {
+                    text-transform: uppercase;
+                    font-size: 0.8em;
+                    color: #fd7e14;
+                    margin-right: 5px;
+                    i {
+                        margin-right: 5px;
+                    }                    
+                }
             }
         }
     }
